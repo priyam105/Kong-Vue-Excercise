@@ -29,7 +29,7 @@
       class="catalog"
     >
       <template
-        v-for="service in services"
+        v-for="service in paginatedServices"
         :key="service.id"
       >
         <Card
@@ -46,19 +46,42 @@
     >
       No services
     </div>
+    <Pagination
+      :current-page="currentPage"
+      :index-end="indexEnd"
+      :records-per-page="recordsPerPage"
+      :total-pages="totalPages"
+      :total-records="totalRecords"
+      @update:current-page="handlePageChange"
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import useServices from '@/composables/useServices'
 import Button from '@/components/AppButton/AppButton.vue'
 import Card from '@/components/AppCard/AppCard.vue'
 import { icons } from '@/lib/icons-mapper'
+import Pagination from '@/components/AppPagination/AppPagination.vue'
+
 const { services, loading } = useServices()
 const searchQuery = ref('')
+const currentPage = ref(1)
+const recordsPerPage = ref(9)
+const totalPages = computed(() => Math.ceil(totalRecords.value / recordsPerPage.value))
+const totalRecords = computed(() => services.value.length || 0)
+const indexStart = computed(() => (currentPage.value - 1) * recordsPerPage.value)
+const indexEnd = computed(() => indexStart.value + recordsPerPage.value)
 
+const paginatedServices = computed(() => {
+  if (services.value.length === 0) return []
+  return services.value.slice(indexStart.value, indexEnd.value)
+})
 
+const handlePageChange = (newPage: number) => {
+  currentPage.value = newPage
+}
 </script>
 
 <style lang="scss" scoped>
