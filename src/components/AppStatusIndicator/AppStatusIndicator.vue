@@ -17,8 +17,8 @@ const props = defineProps<{
 </script>
 <style lang="scss" scoped>
 .status-indicator{
-    display:flex;
     color:var(--color-grey);
+    display:flex;
     font-size: var(--font-size-small);
 }
 </style>

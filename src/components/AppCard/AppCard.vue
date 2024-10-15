@@ -16,9 +16,18 @@
     </div>
     <div class="card__details">
       <Stats :lists="metrics" />
-      <div v-if="developerDataArr.length > 0" class="card__details_avatar">
-        <template v-for="developer in developerDataArr" :key="developer?.id">
-          <Avatar v-if="developer" :avatar-meta-data="developer" />
+      <div
+        v-if="developerDataArr.length > 0"
+        class="card__details_avatar"
+      >
+        <template
+          v-for="developer in developerDataArr"
+          :key="developer?.id"
+        >
+          <Avatar
+            v-if="developer"
+            :avatar-meta-data="developer"
+          />
         </template>
       </div>
     </div>
