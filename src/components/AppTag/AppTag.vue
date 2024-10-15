@@ -24,7 +24,8 @@ const onTagClick = () => {
     width: 90px;
     &__label {
         color: var(--tag-label-color);
-        font-size: var(--font-size-medium);
+        font-size: var(--font-size-small);
+        font-weight: 600;
     }
 }
 </style>

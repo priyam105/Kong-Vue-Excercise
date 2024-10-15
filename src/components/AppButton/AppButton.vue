@@ -49,6 +49,7 @@ const handleClick = () => {
   height: 44px;
   padding: 12px 24px 12px 16px;
   width: 197px;
+  font-weight: 600;
 
   &:hover {
     background-color: var(--primary-button-hover);
