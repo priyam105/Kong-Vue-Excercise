@@ -33,10 +33,8 @@
         :key="service.id"
       >
         <Card
-          :description="service.description"
-          :metrics="service.metrics"
-          :name="service.name"
-          :versions="service.versions"
+          :service="service"
+          @card-clicked-event="handleCardClick"
         />
       </template>
     </div>
@@ -55,6 +53,12 @@
       @update:current-page="handlePageChange"
     />
   </div>
+
+  <Modal
+    v-model:modal-open="modalOpen"
+    :modal-contents="modalContent"
+    @modal-close-event="handleModalClose"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -64,23 +68,53 @@ import Button from '@/components/AppButton/AppButton.vue'
 import Card from '@/components/AppCard/AppCard.vue'
 import { icons } from '@/lib/icons-mapper'
 import Pagination from '@/components/AppPagination/AppPagination.vue'
-
+import Modal from '../AppModal/AppModal.vue'
+import type { Developer, Service, Version } from '@/types/versions'
 const { services, loading } = useServices()
 const searchQuery = ref('')
+const modalOpen = ref(false)
 const currentPage = ref(1)
 const recordsPerPage = ref(9)
+const modalContent = ref<{
+  id: string;
+  type: string;
+  versionName: string;
+  versionDesc: string;
+  developerName: string;
+}[]>([])
+
 const totalPages = computed(() => Math.ceil(totalRecords.value / recordsPerPage.value))
 const totalRecords = computed(() => services.value.length || 0)
 const indexStart = computed(() => (currentPage.value - 1) * recordsPerPage.value)
 const indexEnd = computed(() => indexStart.value + recordsPerPage.value)
-
 const paginatedServices = computed(() => {
   if (services.value.length === 0) return []
   return services.value.slice(indexStart.value, indexEnd.value)
 })
 
+
 const handlePageChange = (newPage: number) => {
   currentPage.value = newPage
+}
+
+const handleCardClick = (services: Service) => {
+  modalOpen.value = true
+  modalContent.value = []
+
+
+  services.versions.forEach((version: Version) =>
+    modalContent.value.push({
+      id: version.id,
+      type: services.type,
+      versionName: version.name,
+      versionDesc: version.description,
+      developerName: version?.developer?.name || '',
+    }))
+
+}
+
+const handleModalClose = () => {
+  modalOpen.value = false
 }
 </script>
 
