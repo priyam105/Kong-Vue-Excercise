@@ -1,21 +1,27 @@
 <template>
-  <div class="card">
+  <div
+    class="card"
+    @click="handleCardClick"
+  >
     <div class="card__status">
       <div class="card__status__info">
-        <StatusIndicator :status="false" />
+        <StatusIndicator :status="props.service.published" />
       </div>
-      <Tag :label="tagLabel" />
+      <Tag
+        v-if="tagLabel"
+        :label="tagLabel"
+      />
     </div>
     <div class="card__info">
       <p class="text-header">
-        {{ name }}
+        {{ props.service.name }}
       </p>
       <p class="text-description">
-        {{ description }}
+        {{ props.service.description }}
       </p>
     </div>
     <div class="card__details">
-      <Stats :lists="metrics" />
+      <Stats :lists="props.service.metrics" />
       <div
         v-if="developerDataArr.length > 0"
         class="card__details_avatar"
@@ -40,31 +46,30 @@ import type { Metrics } from '@/types/metrics'
 import { computed, ref } from 'vue'
 import Avatar from '@/components/AppAvatar/AppAvatar.vue'
 import StatusIndicator from '../AppStatusIndicator/AppStatusIndicator.vue'
-import type { Version } from '@/types/versions'
+import type { Developer, Version } from '@/types/versions'
 
 const props = defineProps<{
-  name: string,
-  versions: Version[],
-  description: string,
-  metrics: Metrics,
-  status?: string
+  service: any
+}>()
+const emit = defineEmits<{
+  (event: 'cardClickedEvent', value: Array<any>): void
 }>()
 
 const tagLabel = computed(() => {
-  console.log(props.versions)
-  const versionString = String(props.versions.length)
+  if (props.service.versions.length === 0) return ''
+
+  const versionString = String(props.service.versions.length)
   return `${versionString} version`
 })
 
 const developerDataArr = computed(() => {
-  const { versions } = props
-
-  if (versions.length === 0) return []
-  return versions.map((item) => {
-    return item.developer
-
-  })
+  return props.service.versions.map((version: { developer: Developer }) => version.developer).filter(Boolean)
 })
+
+const handleCardClick = () => {
+  emit('cardClickedEvent', props.service)
+
+}
 </script>
 <style lang="scss" scoped>
 .card {
