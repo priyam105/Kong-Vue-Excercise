@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev:ui": "vite",
-    "dev:server": "npx --yes tsx --tsconfig './tsconfig.json' './server/index.ts'",
+    "dev:server": "npx --yes tsx --tsconfig \"./tsconfig.json\" \"./server/index.ts\"",
     "build": "run-s lint stylelint typecheck build:app",
     "build:app": "vite build -m production",
     "preview": "vite preview",
