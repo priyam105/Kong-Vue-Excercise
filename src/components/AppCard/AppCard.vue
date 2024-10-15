@@ -2,8 +2,7 @@
   <div class="card">
     <div class="card__status">
       <div class="card__status__info">
-        <span>icon</span>
-        <span class="text-large">Status</span>
+        <StatusIndicator :status="false" />
       </div>
       <Tag :label="tagLabel" />
     </div>
@@ -17,18 +16,9 @@
     </div>
     <div class="card__details">
       <Stats :lists="metrics" />
-      <div
-        v-if="developerDataArr.length > 0"
-        class="card__details_avatar"
-      >
-        <template
-          v-for="developer in developerDataArr"
-          :key="developer?.id"
-        >
-          <Avatar
-            v-if="developer"
-            :avatar-meta-data="developer"
-          />
+      <div v-if="developerDataArr.length > 0" class="card__details_avatar">
+        <template v-for="developer in developerDataArr" :key="developer?.id">
+          <Avatar v-if="developer" :avatar-meta-data="developer" />
         </template>
       </div>
     </div>
@@ -40,6 +30,7 @@ import Stats from '@/components/AppStats/AppStats.vue'
 import type { Metrics } from '@/types/metrics'
 import { computed, ref } from 'vue'
 import Avatar from '@/components/AppAvatar/AppAvatar.vue'
+import StatusIndicator from '../AppStatusIndicator/AppStatusIndicator.vue'
 import type { Version } from '@/types/versions'
 
 const props = defineProps<{
