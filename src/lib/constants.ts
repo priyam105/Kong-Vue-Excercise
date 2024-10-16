@@ -5,16 +5,21 @@ export const CONSTANTS = {
       id: 1,
       icon: '',
       label: 'Organization',
+      link: '/organization',
     },
     {
       id: 2,
       icon: '',
       label: 'Settings',
+      link: '/settings',
+
     },
     {
       id: 3,
       icon: '',
-      label: 'Katherine',
+      label: 'Priyam',
+      link: '/user',
+
     },
   ],
 }

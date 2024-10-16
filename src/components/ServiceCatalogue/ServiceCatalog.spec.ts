@@ -27,7 +27,6 @@ describe('ServiceCatalog', () => {
   it('shows the search input', async () => {
     // No `mockedResponses` modification needed; just use the default mocked response
     const wrapper = mount(ServiceCatalog)
-
     expect(wrapper.findTestId('search-input').isVisible()).toBe(true)
   })
 

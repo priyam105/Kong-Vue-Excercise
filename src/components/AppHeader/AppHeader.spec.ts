@@ -9,16 +9,19 @@ describe('AppHeader.vue', () => {
       id: 1,
       icon: '',
       label: 'Organization',
+      link: '/organization',
     },
     {
       id: 2,
       icon: '',
       label: 'Settings',
+      link: '/settings',
     },
     {
       id: 3,
       icon: '',
-      label: 'Katherine',
+      label: 'user',
+      link: '/user',
     },
   ]
   const wrapper = mount(Header, {

@@ -23,7 +23,7 @@
     <div class="card__details">
       <Stats
         v-if="serviceDetails.metrics"
-        :lists="serviceDetails.metrics"
+        :list="serviceDetails.metrics"
       />
       <div
         v-if="getDeveloperList?.length > 0"

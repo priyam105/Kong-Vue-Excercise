@@ -19,9 +19,12 @@
         v-for="item in props.linkItems"
         :key="item.id"
       >
-        <div class="header__links-items header-text">
+        <router-link
+          class="header__links-items header-text"
+          :to="item.link || '/'"
+        >
           {{ item.label }}
-        </div>
+        </router-link>
       </template>
     </div>
   </nav>
