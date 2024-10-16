@@ -1,11 +1,11 @@
 <template>
   <div
-    class="card"
+    :class="['card', { card__unclickable: versions.length === 0 }]"
     @click="handleCardClick"
   >
     <div class="card__status">
       <div class="card__status__info">
-        <StatusIndicator :status="props.service.published" />
+        <StatusIndicator :status="serviceDetails.published" />
       </div>
       <Tag
         v-if="tagLabel"
@@ -14,25 +14,28 @@
     </div>
     <div class="card__info">
       <p class="text-header">
-        {{ props.service.name }}
+        {{ serviceDetails.name }}
       </p>
       <p class="text-description">
-        {{ props.service.description }}
+        {{ serviceDetails.description }}
       </p>
     </div>
     <div class="card__details">
-      <Stats :lists="props.service.metrics" />
+      <Stats
+        v-if="serviceDetails.metrics"
+        :lists="serviceDetails.metrics"
+      />
       <div
-        v-if="developerDataArr.length > 0"
+        v-if="getDeveloperList?.length > 0"
         class="card__details_avatar"
       >
-        <template v-if="developerDataArr.length > 2">
+        <template v-if="getDeveloperList?.length > 2">
           <div class="avatar-placeholder">
-            {{ `+${developerDataArr.length - 2}` }}
+            {{ `+${getDeveloperList.length - 2}` }}
           </div>
         </template>
         <template
-          v-for="developer in developerDataArr.slice(0,2)"
+          v-for="developer in getDeveloperList.slice(0, 2)"
           :key="developer?.id"
         >
           <Avatar
@@ -47,33 +50,36 @@
 <script setup lang="ts">
 import Tag from '@/components/AppTag/AppTag.vue'
 import Stats from '@/components/AppStats/AppStats.vue'
-import type { Metrics } from '@/types/metrics'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import Avatar from '@/components/AppAvatar/AppAvatar.vue'
 import StatusIndicator from '../AppStatusIndicator/AppStatusIndicator.vue'
-import type { Developer, Version } from '@/types/versions'
+import type { Developer, Service } from '@/types/versions'
 
-const props = defineProps<{
-  service: any
-}>()
+const props = defineProps<{ serviceDetails: Service }>()
+
 const emit = defineEmits<{
-  (event: 'cardClickedEvent', value: Array<any>): void
+  (event: 'cardClickedEvent', value: Service): void;
 }>()
+
+const versions = computed(() => {
+  return props.serviceDetails.versions || []
+})
 
 const tagLabel = computed(() => {
-  if (props.service.versions.length === 0) return ''
-
-  const versionString = String(props.service.versions.length)
+  if (versions.value.length === 0) return ''
+  const versionString = String(versions.value?.length)
   return `${versionString} version`
 })
 
-const developerDataArr = computed(() => {
-  return props.service.versions.map((version: { developer: Developer }) => version.developer).filter(Boolean)
+const getDeveloperList = computed(() => {
+  return versions.value
+    ?.map((version: { developer: Developer }) => version.developer)
+    .filter(Boolean)
 })
 
 const handleCardClick = () => {
-  emit('cardClickedEvent', props.service)
-
+  // Emit only if the services.versions has valid data which further triggers the modal
+  if (versions.value.length > 0) emit('cardClickedEvent', props.serviceDetails)
 }
 </script>
 <style lang="scss" scoped>
@@ -84,6 +90,10 @@ const handleCardClick = () => {
   margin: 6px;
   padding: 8px 16px;
   width: 380px;
+
+  &__unclickable {
+    cursor: auto;
+  }
 
   &__status {
     display: flex;
@@ -106,27 +116,28 @@ const handleCardClick = () => {
 
   .text-description {
     color: var(--color-grey);
-    font-size: var(--font-size-small)
+    font-size: var(--font-size-small);
   }
-     .card__details_avatar {
-       align-items: center;
-       display: flex;
-       position: relative;
-     }
 
-     .avatar-placeholder {
-       background-color: #ccc;
-       border-radius: 50%;
-       color: #fff;
-       display: inline-block;
-       font-size: 14px;
-       height: 36px;
-       line-height: 36px;
+  .card__details_avatar {
+    align-items: center;
+    display: flex;
+    position: relative;
+  }
+
+  .avatar-placeholder {
+    background-color: #ccc;
+    border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    height: 36px;
+    line-height: 36px;
     margin-left: -20px;
-      position:absolute;
-       text-align: center;
-       width: 36px;
-          z-index: 4;
-     }
+    position: absolute;
+    text-align: center;
+    width: 36px;
+    z-index: 4;
+  }
 }
 </style>

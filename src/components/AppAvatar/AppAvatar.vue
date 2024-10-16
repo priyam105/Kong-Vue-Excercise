@@ -1,14 +1,7 @@
 <template>
-  <div
-    v-if="avatarMetaData?.avatar"
-    class="avatars"
-  >
+  <div v-if="avatarMetaData?.avatar" class="avatars">
     <div class="avatars__profile">
-      <img
-        :alt="`${avatarMetaData.name}'s image`"
-        class="avatars__img"
-        :src="avatarMetaData?.avatar"
-      >
+      <img :alt="`${avatarMetaData.name}'s image`" class="avatars__img" :src="avatarMetaData?.avatar">
     </div>
   </div>
 </template>
@@ -21,44 +14,47 @@ const { avatarMetaData } = defineProps<{
 </script>
 <style lang="scss" scoped>
 .avatars {
-    border: 2px solid #ccc;
-    border-radius: 50%;
-    display: inline-block;
-    height: 36px;
-    overflow: hidden;
-    position: relative;
-    width: 36px;
-      z-index: 1;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  display: inline-block;
+  height: 36px;
+  overflow: hidden;
+  position: relative;
+  width: 36px;
+  z-index: 1;
 
 }
+
 .avatars:nth-child(1) {
   margin-right: -11px;
   z-index: 3;
-  /* Adjust to overlap slightly */
+
 }
+
 .avatars:nth-child(2) {
   margin-right: -2px;
   z-index: 2;
-  /* Adjust to overlap slightly */
+
 }
+
 .avatars:nth-child(3) {
   margin-left: -10px;
   z-index: 1;
-  /* Adjust to overlap slightly */
+
 }
 
 .avatars__profile {
-    align-items: center;
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    width: 100%;
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
 }
 
 .avatars__img {
-    height: 100%;
-    object-fit: cover;
-    width: 100%;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
 
 }
 </style>

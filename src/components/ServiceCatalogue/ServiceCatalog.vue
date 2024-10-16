@@ -16,7 +16,6 @@
           placeholder="Search services"
         >
         <Button
-
           appearance="primary"
           :icon="icons.plusIcon"
           label="Service Package"
@@ -37,20 +36,20 @@
         :key="service.id"
       >
         <Card
-          :service="service"
+          :service-details="service"
           @card-clicked-event="handleCardClick"
         />
       </template>
     </div>
     <div
-      v-else-if="services.length===0 && !loading"
+      v-else-if="services.length === 0 && !loading"
       data-testid="no-results"
     >
       No services
     </div>
 
     <Pagination
-      v-if="services.length >0 "
+      v-if="services.length > 0"
       :current-page="currentPage"
       :index-end="indexEnd"
       :records-per-page="recordsPerPage"
@@ -119,7 +118,7 @@ const handleCardClick = (services: Service) => {
       type: services.type,
       versionName: version.name,
       versionDesc: version.description,
-      developerDetails:version.developer,
+      developerDetails: version.developer,
     }))
   console.log(modalContent)
 }

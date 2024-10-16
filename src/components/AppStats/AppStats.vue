@@ -1,30 +1,32 @@
 <template>
   <div class="stats">
+    {{ Object.keys(props).length }}
     <ul
       v-if="!isListsEmpty"
       class="stats__list"
     >
       <li>
-        <span class="value">{{ formatMetric('latency', lists.latency) }}</span>
+        <span class="value">{{ formatMetric('latency', lists?.latency) }}</span>
         <span class="key">latency</span>
       </li>
       <li>
-        <span class="value">{{ formatMetric('uptime', lists.uptime) }}</span>
+        <span class="value">{{ formatMetric('uptime', lists?.uptime) }}</span>
         <span class="key">uptime</span>
       </li>
       <li>
         <div class="requests-error">
           <div class="request">
-            <span class="value ">{{ formatMetric('requests', lists.requests) }}</span>
+            <span class="value ">{{ formatMetric('requests', lists?.requests) }}</span>
             <span class="key">requests</span>
           </div>
           <div class="errors">
-            <span class="value ">{{ formatMetric('errors', lists.errors) }}</span>
+            <span class="value ">{{ formatMetric('errors', lists?.errors) }}</span>
             <span class="key">errors</span>
           </div>
         </div>
       </li>
     </ul>
+    <div v-else>ss</div>
   </div>
 </template>
 

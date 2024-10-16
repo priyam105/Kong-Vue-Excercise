@@ -18,6 +18,7 @@
           v-for="content in props.modalContents"
           :key="content.id"
           class="modal__content"
+          :class="{ 'last-column': content?.developerDetails?.name }"
         >
           <div class="version-name">
             v{{ content.versionName }}
@@ -93,11 +94,15 @@ const handleModalClose = () => {
     border-bottom: 1px solid #F1F1F5;
     display: grid;
     font-size: var(--font-size-small);
-    grid-template-columns: 1fr 4fr 1.5fr 2fr;
+    grid-template-columns: 1fr 4fr 1.5fr auto;
     padding: 12px 0 12px 0;
 
     &:last-child {
       border-bottom: none;
+    }
+
+    &.last-column {
+      grid-template-columns: 1fr 4fr 1.5fr 2fr;
     }
   }
 

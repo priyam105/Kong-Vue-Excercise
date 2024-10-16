@@ -54,9 +54,8 @@ const handleNextPage = () => {
 }
 
 const count = computed(() => {
-  //`${totalRecords > currentPage.value * recordsPerPage ? currentPage.value * recordsPerPage : totalRecords}
-  const recordsPerPage = props.recordsPerPage ?? 9 // Default to 9 if undefined
-  const totalRecords = props.totalRecords ?? 0 // Default to 0 if undefined
+  const recordsPerPage = props.recordsPerPage ?? 9
+  const totalRecords = props.totalRecords ?? 0
 
   const fromPageCount = (currentPage.value - 1) * recordsPerPage + 1
   const toPageCount = totalRecords > currentPage.value * recordsPerPage ? currentPage.value * recordsPerPage : totalRecords
@@ -65,20 +64,20 @@ const count = computed(() => {
 </script>
 <style scoped lang="scss">
 .pagination {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    justify-content: center;
-    margin-top:8px;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 8px;
 
-    .count {
-        color: var(--color-grey);
-        font-size: var(--font-size-medium);
+  .count {
+    color: var(--color-grey);
+    font-size: var(--font-size-medium);
 
-        &__page {
-            font-weight: 600;
-        }
+    &__page {
+      font-weight: 600;
     }
+  }
 }
 </style>
