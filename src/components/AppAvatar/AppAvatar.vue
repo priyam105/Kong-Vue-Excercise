@@ -1,7 +1,14 @@
 <template>
-  <div v-if="avatarMetaData?.avatar" class="avatars">
+  <div
+    v-if="avatarMetaData?.avatar"
+    class="avatars"
+  >
     <div class="avatars__profile">
-      <img :alt="`${avatarMetaData.name}'s image`" class="avatars__img" :src="avatarMetaData?.avatar">
+      <img
+        :alt="`${avatarMetaData.name}'s image`"
+        class="avatars__img"
+        :src="avatarMetaData?.avatar"
+      >
     </div>
   </div>
 </template>

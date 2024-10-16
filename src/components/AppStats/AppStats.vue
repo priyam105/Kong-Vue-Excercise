@@ -1,10 +1,7 @@
 <template>
   <div class="stats">
     {{ Object.keys(props).length }}
-    <ul
-      v-if="!isListsEmpty"
-      class="stats__list"
-    >
+    <ul v-if="!isListsEmpty" class="stats__list">
       <li>
         <span class="value">{{ formatMetric('latency', lists?.latency) }}</span>
         <span class="key">latency</span>
@@ -26,7 +23,6 @@
         </div>
       </li>
     </ul>
-    <div v-else>ss</div>
   </div>
 </template>
 
