@@ -16,7 +16,7 @@ const props = defineProps<{
   border-radius: 50px;
   padding: 8px 16px 8px 16px;
   text-align: center;
-  width: 90px;
+  width: 60px;
 
   &__label {
     color: var(--tag-label-color);

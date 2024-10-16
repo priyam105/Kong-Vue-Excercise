@@ -70,6 +70,7 @@ const count = computed(() => {
     flex-direction: row;
     gap: 10px;
     justify-content: center;
+    margin-top:8px;
 
     .count {
         color: var(--color-grey);

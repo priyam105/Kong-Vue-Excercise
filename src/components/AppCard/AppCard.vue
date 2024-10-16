@@ -26,8 +26,13 @@
         v-if="developerDataArr.length > 0"
         class="card__details_avatar"
       >
+        <template v-if="developerDataArr.length > 2">
+          <div class="avatar-placeholder">
+            {{ `+${developerDataArr.length - 2}` }}
+          </div>
+        </template>
         <template
-          v-for="developer in developerDataArr"
+          v-for="developer in developerDataArr.slice(0,2)"
           :key="developer?.id"
         >
           <Avatar
@@ -75,6 +80,7 @@ const handleCardClick = () => {
 .card {
   border: var(--card-border);
   border-radius: 10px;
+  cursor: pointer;
   margin: 6px;
   padding: 8px 16px;
   width: 380px;
@@ -102,5 +108,25 @@ const handleCardClick = () => {
     color: var(--color-grey);
     font-size: var(--font-size-small)
   }
+     .card__details_avatar {
+       align-items: center;
+       display: flex;
+       position: relative;
+     }
+
+     .avatar-placeholder {
+       background-color: #ccc;
+       border-radius: 50%;
+       color: #fff;
+       display: inline-block;
+       font-size: 14px;
+       height: 36px;
+       line-height: 36px;
+    margin-left: -20px;
+      position:absolute;
+       text-align: center;
+       width: 36px;
+          z-index: 4;
+     }
 }
 </style>

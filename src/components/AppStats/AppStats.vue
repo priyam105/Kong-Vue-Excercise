@@ -4,20 +4,27 @@
       v-if="!isListsEmpty"
       class="stats__list"
     >
-      <li
-        v-for="value, key, index in props.lists"
-        :key="`${index}_${key}`"
-      >
-        <span class="value">{{ formatMetric(key, value) }}</span>
-        <span class="key">{{ key }}</span>
+      <li>
+        <span class="value">{{ formatMetric('latency', lists.latency) }}</span>
+        <span class="key">latency</span>
+      </li>
+      <li>
+        <span class="value">{{ formatMetric('uptime', lists.uptime) }}</span>
+        <span class="key">uptime</span>
+      </li>
+      <li>
+        <div class="requests-error">
+          <div class="request">
+            <span class="value ">{{ formatMetric('requests', lists.requests) }}</span>
+            <span class="key">requests</span>
+          </div>
+          <div class="errors">
+            <span class="value ">{{ formatMetric('errors', lists.errors) }}</span>
+            <span class="key">errors</span>
+          </div>
+        </div>
       </li>
     </ul>
-    <div
-      v-else
-      class="stats__empty"
-    >
-      Not configured with run-time yet
-    </div>
   </div>
 </template>
 
@@ -35,23 +42,37 @@ const isListsEmpty = computed(() => {
 </script>
 <style lang="scss" scoped>
 .stats {
-    &__list {
-        li::marker {
-            color: #42D782;
-        }
+  &__list {
+    li::marker {
+      color: #42D782;
+    }
+
+    .requests-error {
+      display: flex;
+      gap: 5px;
+
+      .errors {
+        margin-left: 10px;
 
         .value {
-            display: inline-block;
-            font-size: var(--font-size-small);
-            font-weight: 600;
-            width: 75px;
+          width: 40px;
         }
-
-        .key {
-            color: var(--color-grey);
-            font-size: var(--font-size-small);
-            font-weight: 600;
-        }
+      }
     }
+
+    .value {
+      display: inline-block;
+      font-size: var(--font-size-small);
+      font-weight: 600;
+      width: 45px;
+    }
+
+    .key {
+      color: var(--color-grey);
+      font-size: var(--font-size-small);
+      font-weight: 600;
+    }
+
+  }
 }
 </style>

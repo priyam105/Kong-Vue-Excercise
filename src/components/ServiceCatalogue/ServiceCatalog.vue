@@ -16,6 +16,7 @@
           placeholder="Search services"
         >
         <Button
+
           appearance="primary"
           :icon="icons.plusIcon"
           label="Service Package"
@@ -24,8 +25,11 @@
       </div>
     </div>
 
+    <div v-if="loading && services.length === 0">
+      Loading...
+    </div>
     <div
-      v-if="services.length"
+      v-else-if="services.length && !loading"
       class="catalog"
     >
       <template
@@ -39,12 +43,14 @@
       </template>
     </div>
     <div
-      v-else
+      v-else-if="services.length===0 && !loading"
       data-testid="no-results"
     >
       No services
     </div>
+
     <Pagination
+      v-if="services.length >0 "
       :current-page="currentPage"
       :index-end="indexEnd"
       :records-per-page="recordsPerPage"
@@ -62,7 +68,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import useServices from '@/composables/useServices'
 import Button from '@/components/AppButton/AppButton.vue'
 import Card from '@/components/AppCard/AppCard.vue'
@@ -70,8 +76,13 @@ import { icons } from '@/lib/icons-mapper'
 import Pagination from '@/components/AppPagination/AppPagination.vue'
 import Modal from '../AppModal/AppModal.vue'
 import type { Developer, Service, Version } from '@/types/versions'
-const { services, loading } = useServices()
+
 const searchQuery = ref('')
+console.log(searchQuery.value)
+const { services, loading } = useServices(searchQuery)
+
+
+
 const modalOpen = ref(false)
 const currentPage = ref(1)
 const recordsPerPage = ref(9)
@@ -80,7 +91,7 @@ const modalContent = ref<{
   type: string;
   versionName: string;
   versionDesc: string;
-  developerName: string;
+  developerDetails: Developer;
 }[]>([])
 
 const totalPages = computed(() => Math.ceil(totalRecords.value / recordsPerPage.value))
@@ -100,7 +111,7 @@ const handlePageChange = (newPage: number) => {
 const handleCardClick = (services: Service) => {
   modalOpen.value = true
   modalContent.value = []
-
+  console.log(services)
 
   services.versions.forEach((version: Version) =>
     modalContent.value.push({
@@ -108,9 +119,9 @@ const handleCardClick = (services: Service) => {
       type: services.type,
       versionName: version.name,
       versionDesc: version.description,
-      developerName: version?.developer?.name || '',
+      developerDetails:version.developer,
     }))
-
+  console.log(modalContent)
 }
 
 const handleModalClose = () => {
@@ -148,10 +159,8 @@ const handleModalClose = () => {
 }
 
 .catalog {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin: 20px 0 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, auto)
 }
 
 .service {

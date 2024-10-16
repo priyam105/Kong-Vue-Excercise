@@ -1,34 +1,36 @@
 <template>
-  <button
+  <component
+    :is="buttonType"
     :class="[
-      `${props?.appearance || 'primary'}-button`,
+      `${appearance || 'primary'}-button`,
       { 'disabled': isDisabled }
     ]"
     :disabled="isDisabled"
     @click="handleClick"
   >
-    <span v-if="props.iconOnly && props.icon">{{ icon }}</span>
+    <span v-if="iconOnly && icon">{{ icon }}</span>
     <span v-else>
-      <span v-if="props.showIconOnLeft && props.icon">{{ icon }}</span>
-      <span v-if="!props.iconOnly">{{ props.label }}</span>
-      <span v-if="props.showIconOnRight && props.icon">{{ icon }}</span>
+      <span v-if="showIconOnLeft && icon">{{ icon }}</span>
+      <span v-if="!iconOnly">{{ label }}</span>
+      <span v-if="showIconOnRight && icon">{{ icon }}</span>
     </span>
-  </button>
-  <span v-if="props.showIconOnRight">{{ icon }}</span>
+  </component>
+  <span v-if="showIconOnRight">{{ icon }}</span>
 </template>
 
 <script lang="ts" setup>
-import { defineProps } from 'vue'
+import { computed, defineProps } from 'vue'
 
-const props = defineProps<{
-  label?: string | '',
-  appearance?: string | 'primary',
-  icon?: string | null,
-  showIconOnLeft?: boolean | null,
-  showIconOnRight?: boolean,
-  iconOnly?: boolean,
-  isDisabled?: boolean
-}>()
+const props = defineProps({
+  appearance: { type: String, default: 'primary' },
+  label: { type:String, default:'' },
+  icon: String,
+  showIconOnLeft: Boolean,
+  showIconOnRight: Boolean,
+  iconOnly: Boolean,
+  isDisabled: Boolean,
+  to: [String, Object], // to handle either string or object (like router-link)
+})
 const emit = defineEmits<{
   (event: 'buttonClicked'): void
 }>()
@@ -38,6 +40,16 @@ const handleClick = () => {
     emit('buttonClicked')
   }
 }
+const buttonType = computed((): string => {
+  if (props.to && typeof props.to === 'string') {
+    return 'a'
+  } else if (props.to) {
+    return 'router-link'
+  }
+
+  return 'button'
+})
+
 </script>
 <style lang="scss" scoped>
 .primary-button {
