@@ -48,7 +48,7 @@ const props = defineProps<{
   }
 
   &__logo {
-    margin: 0 0 0 60px;
+    margin: 0 0 0 12px;
 
     &-text {
       margin-left: 10px;

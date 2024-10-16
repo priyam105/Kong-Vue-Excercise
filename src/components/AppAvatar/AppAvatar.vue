@@ -1,23 +1,22 @@
 <template>
   <div
-    v-if="props.avatarMetaData?.avatar"
+    v-if="avatarMetaData?.avatar"
     class="avatars"
   >
     <div class="avatars__profile">
       <img
-        :alt="`${props.avatarMetaData.name}'s image`"
+        :alt="`${avatarMetaData.name}'s image`"
         class="avatars__img"
-        :src="props.avatarMetaData?.avatar"
+        :src="avatarMetaData?.avatar"
       >
     </div>
   </div>
 </template>
 <script lang="ts" setup>
 import type { Developer } from '@/types/versions'
-const props = defineProps<{
+const { avatarMetaData } = defineProps<{
   avatarMetaData: Developer
 }>()
-
 
 </script>
 <style lang="scss" scoped>
@@ -27,7 +26,25 @@ const props = defineProps<{
     display: inline-block;
     height: 36px;
     overflow: hidden;
+    position: relative;
     width: 36px;
+      z-index: 1;
+
+}
+.avatars:nth-child(1) {
+  margin-right: -11px;
+  z-index: 3;
+  /* Adjust to overlap slightly */
+}
+.avatars:nth-child(2) {
+  margin-right: -2px;
+  z-index: 2;
+  /* Adjust to overlap slightly */
+}
+.avatars:nth-child(3) {
+  margin-left: -10px;
+  z-index: 1;
+  /* Adjust to overlap slightly */
 }
 
 .avatars__profile {
@@ -39,10 +56,9 @@ const props = defineProps<{
 }
 
 .avatars__img {
-    /* Make the image cover the avatar area */
     height: 100%;
     object-fit: cover;
     width: 100%;
-    /* Ensure image scales proportionally */
+
 }
 </style>
