@@ -51,7 +51,7 @@ const props = defineProps<{
   }
 
   &__logo {
-    margin: 0 0 0 12px;
+    margin: 0 0 0 65px;
 
     &-text {
       margin-left: 10px;

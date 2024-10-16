@@ -1,5 +1,8 @@
 <template>
-  <div class="tag">
+  <div
+    class="tag"
+    data-test="tag"
+  >
     <span class="tag__label">{{ label }}</span>
   </div>
 </template>

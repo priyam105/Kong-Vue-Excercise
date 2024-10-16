@@ -10,6 +10,7 @@ export default [
       email: 'Chester_Little@hotmail.com',
       avatar: 'https://avatars.githubusercontent.com/u/65182094',
     },
+    modifiedDate: '2024-07-03T21:23:26.591Z',
   },
 
 

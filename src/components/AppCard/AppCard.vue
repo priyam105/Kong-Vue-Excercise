@@ -67,7 +67,11 @@ const versions = computed(() => {
 
 const tagLabel = computed(() => {
   if (versions.value.length === 0) return ''
+
   const versionString = String(versions.value?.length)
+  if (versions.value.length > 1) {
+    return `${versionString} versions`
+  }
   return `${versionString} version`
 })
 

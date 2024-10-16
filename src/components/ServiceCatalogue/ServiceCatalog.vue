@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import useServices from '@/composables/useServices'
 import Button from '@/components/AppButton/AppButton.vue'
 import Card from '@/components/AppCard/AppCard.vue'
@@ -90,6 +90,7 @@ const modalContent = ref<{
   type: string;
   versionName: string;
   versionDesc: string;
+  modifiedDate:string;
   developerDetails: Developer;
 }[]>([])
 
@@ -118,6 +119,7 @@ const handleCardClick = (services: Service) => {
       type: services.type,
       versionName: version.name,
       versionDesc: version.description,
+      modifiedDate:version.updated_at,
       developerDetails: version.developer,
     }))
   console.log(modalContent)
