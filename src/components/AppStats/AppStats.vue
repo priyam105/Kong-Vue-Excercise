@@ -1,26 +1,25 @@
 <template>
   <div class="stats">
-    {{ Object.keys(props).length }}
     <ul
-      v-if="!isListsEmpty"
+      v-if="!isListEmpty"
       class="stats__list"
     >
       <li>
-        <span class="value">{{ formatMetric('latency', lists?.latency) }}</span>
+        <span class="value">{{ formatMetric('latency', list?.latency) }}</span>
         <span class="key">latency</span>
       </li>
       <li>
-        <span class="value">{{ formatMetric('uptime', lists?.uptime) }}</span>
+        <span class="value">{{ formatMetric('uptime', list?.uptime) }}</span>
         <span class="key">uptime</span>
       </li>
       <li>
         <div class="requests-error">
           <div class="request">
-            <span class="value ">{{ formatMetric('requests', lists?.requests) }}</span>
+            <span class="value ">{{ formatMetric('requests', list?.requests) }}</span>
             <span class="key">requests</span>
           </div>
           <div class="errors">
-            <span class="value ">{{ formatMetric('errors', lists?.errors) }}</span>
+            <span class="value ">{{ formatMetric('errors', list?.errors) }}</span>
             <span class="key">errors</span>
           </div>
         </div>
@@ -33,11 +32,11 @@
 import { formatMetric } from '@/lib/utils'
 import { computed } from 'vue'
 const props = defineProps<{
-  lists: Record<string, any>
+  list: Record<string, any>
 }>()
 
-const isListsEmpty = computed(() => {
-  return props?.lists && Object.keys(props.lists).length === 0
+const isListEmpty = computed(() => {
+  return props?.list && Object.keys(props.list).length === 0
 })
 
 </script>

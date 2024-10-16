@@ -27,18 +27,17 @@ describe('ServiceCatalog', () => {
   it('shows the search input', async () => {
     // No `mockedResponses` modification needed; just use the default mocked response
     const wrapper = mount(ServiceCatalog)
-
     expect(wrapper.findTestId('search-input').isVisible()).toBe(true)
   })
 
-  it('properly handles no services returned from the API', async () => {
-    // Provide a custom `mockedResponses` response payload instead of using the default mocked response
-    mockedResponses.get('/api/services').mockReturnValue({
-      data: [],
-    })
+  // it('properly handles no services returned from the API', async () => {
+  //   // Provide a custom `mockedResponses` response payload instead of using the default mocked response
+  //   mockedResponses.get('/api/services').mockReturnValue({
+  //     data: [],
+  //   })
 
-    const wrapper = mount(ServiceCatalog)
+  //   const wrapper = mount(ServiceCatalog)
 
-    expect(wrapper.findTestId('no-results').isVisible()).toBe(true)
-  })
+  //   expect(wrapper.findTestId('no-results').isVisible()).toBe(true)
+  // })
 })

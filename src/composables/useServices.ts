@@ -32,10 +32,13 @@ export default function useServices(searchQuery?: Ref<string>): any {
       loading.value = false
     }
   }
-  watch(searchQuery, async () => {
-    console.log(searchQuery.value)
-    await getServices()
-  }, { immediate: true })
+
+  if (searchQuery) {
+    watch(searchQuery, async () => {
+      console.log(searchQuery.value)
+      await getServices()
+    }, { immediate: true })
+  }
 
   // onMounted(() => {
   //   intervalId = setInterval(getServices, pollingInterval)

@@ -8,6 +8,15 @@ const router = createRouter({
       name: 'home',
       component: () => import('../views/PageHome.vue'),
     },
+    {
+      path: '/organization',
+      name: 'organization',
+      component: () => import('../views/PageOrganization.vue'),
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/',
+    },
   ],
 })
 

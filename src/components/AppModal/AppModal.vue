@@ -1,66 +1,64 @@
 <template>
-  <Teleport to="body">
-    <div
-      v-if="props.modalOpen"
-      class="overlay"
-    >
-      <div class="modal">
-        <div class="modal__header">
-          <h4>Versions ({{ props.modalContents.length }})</h4>
-          <Button
-            appearance="secondary"
-            icon="X"
-            :icon-only="true"
-            @button-clicked="handleModalClose"
-          />
+  <!-- <Teleport to="body"> -->
+  <div
+    v-if="modalOpen"
+    class="overlay"
+  >
+    <div class="modal">
+      <div class="modal__header">
+        <h4>Versions ({{ modalContents.length }})</h4>
+        <Button
+          appearance="secondary"
+          icon="X"
+          :icon-only="true"
+          @button-clicked="handleModalClose"
+        />
+      </div>
+      <div
+        v-for="content in modalContents"
+        :key="content.id"
+        class="modal__content"
+        :class="{ 'last-column': content?.developerDetails?.name }"
+      >
+        <div class="version-name">
+          v{{ content.versionName }}
+        </div>
+        <div class="version-desc">
+          {{ content.versionDesc }}
+        </div>
+        <div class="version-type">
+          <Tag :label="content.type" />
         </div>
         <div
-          v-for="content in props.modalContents"
-          :key="content.id"
-          class="modal__content"
-          :class="{ 'last-column': content?.developerDetails?.name }"
+          v-if="content?.developerDetails?.name"
+          class="version-dev-name"
         >
-          <div class="version-name">
-            v{{ content.versionName }}
-          </div>
-          <div class="version-desc">
-            {{ content.versionDesc }}
-          </div>
-          <div class="version-type">
-            <Tag :label="content.type" />
-          </div>
-          <div
-            v-if="content?.developerDetails?.name"
-            class="version-dev-name"
-          >
-            <Avatar :avatar-meta-data="content.developerDetails" />
-            <div>{{ content.developerDetails.name }}</div>
-          </div>
+          <Avatar :avatar-meta-data="content.developerDetails" />
+          <div>{{ content.developerDetails.name }}</div>
         </div>
       </div>
     </div>
-  </Teleport>
+  </div>
+  <!-- </Teleport> -->
 </template>
 <script lang="ts" setup>
 import Button from '../AppButton/AppButton.vue'
 import Avatar from '../AppAvatar/AppAvatar.vue'
 import Tag from '../AppTag/AppTag.vue'
-const props = defineProps<
+defineProps<
   {
     modalOpen: boolean,
     modalContents: Array<any>
   }
 >()
-console.log(props.modalContents)
+
 const emit = defineEmits<{
   (event: 'modalCloseEvent'): void
 }>()
 
-
 const handleModalClose = () => {
   emit('modalCloseEvent')
 }
-
 
 </script>
 <style lang="scss" scoped>

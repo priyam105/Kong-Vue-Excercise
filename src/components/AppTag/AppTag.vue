@@ -1,20 +1,17 @@
 <template>
   <div class="tag">
-    <span class="tag__label">{{ props.label }}</span>
+    <span class="tag__label">{{ label }}</span>
   </div>
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
-  label: string
-}>()
-
+const { label } = defineProps<{ label: string }>()
 </script>
 <style lang="scss" scoped>
 .tag {
   background-color: var(--tag-background);
   border-radius: 50px;
-  padding: 8px 16px 8px 16px;
+  padding: 10px 8px 10px 8px;
   text-align: center;
   width: 60px;
 
@@ -22,6 +19,7 @@ const props = defineProps<{
     color: var(--tag-label-color);
     font-size: var(--font-size-small);
     font-weight: 600;
+    vertical-align: middle;
   }
 }
 </style>
