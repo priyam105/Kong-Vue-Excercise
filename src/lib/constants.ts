@@ -3,20 +3,20 @@ export const CONSTANTS = {
   headerItems: [
     {
       id: 1,
-      icon: '',
+      icon: new URL('@/assets/icons/organization.svg',import.meta.url).href,
       label: 'Organization',
       link: '/organization',
     },
     {
       id: 2,
-      icon: '',
+      icon: new URL('@/assets/icons/gear.svg',import.meta.url).href,
       label: 'Settings',
       link: '/settings',
 
     },
     {
       id: 3,
-      icon: '',
+      icon: new URL('@/assets/icons/user.svg', import.meta.url).href,
       label: 'Priyam',
       link: '/user',
 

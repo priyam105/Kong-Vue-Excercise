@@ -90,7 +90,7 @@ const modalContent = ref<{
   type: string;
   versionName: string;
   versionDesc: string;
-  modifiedDate:string;
+  modifiedDate: string;
   developerDetails: Developer;
 }[]>([])
 
@@ -119,7 +119,7 @@ const handleCardClick = (services: Service) => {
       type: services.type,
       versionName: version.name,
       versionDesc: version.description,
-      modifiedDate:version.updated_at,
+      modifiedDate: version.updated_at,
       developerDetails: version.developer,
     }))
   console.log(modalContent)
@@ -138,7 +138,7 @@ const handleModalClose = () => {
 
   &__header {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
 
     &-title {
@@ -149,19 +149,21 @@ const handleModalClose = () => {
   }
 
   &__actions {
-    align-items: baseline;
+    align-items: center;
     display: flex;
+    flex-direction: column;
     gap: 12px;
-
+    margin-bottom:12px;
     .search-input {
       padding: 8px 4px;
+        width: 100%;
     }
   }
 }
 
 .catalog {
   display: grid;
-  grid-template-columns: repeat(3, auto)
+  grid-template-columns: auto
 }
 
 .service {
@@ -181,7 +183,24 @@ const handleModalClose = () => {
   }
 }
 
-input {
-  padding: 8px 4px;
+
+@media screen and (min-width: 1000px) {
+
+.service-catalog{
+  &__actions{
+    flex-direction: row;
+  }
+    &__header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+
+    }
+}
+.catalog {
+  display: grid;
+  grid-template-columns: repeat(3, auto)
+}
 }
 </style>

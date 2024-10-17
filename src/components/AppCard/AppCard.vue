@@ -88,12 +88,13 @@ const handleCardClick = () => {
 </script>
 <style lang="scss" scoped>
 .card {
+  background-color: #fff;
   border: var(--card-border);
   border-radius: 10px;
   cursor: pointer;
   margin: 6px;
   padding: 8px 16px;
-  width: 380px;
+  width: 90%;
 
   &__unclickable {
     cursor: auto;
@@ -107,10 +108,17 @@ const handleCardClick = () => {
   }
 
   &__details {
-    align-items: end;
+    align-items: flex-start;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
+
+    &_avatar{
+      align-items: center;
+        display: flex;
+        left: 12%;
+        position: relative;
+    }
   }
 
   .text-header {
@@ -123,11 +131,7 @@ const handleCardClick = () => {
     font-size: var(--font-size-small);
   }
 
-  .card__details_avatar {
-    align-items: center;
-    display: flex;
-    position: relative;
-  }
+
 
   .avatar-placeholder {
     background-color: #ccc;
@@ -143,5 +147,27 @@ const handleCardClick = () => {
     width: 36px;
     z-index: 4;
   }
+}
+@media screen and (min-width: 1000px) {
+.card {
+width: 400px;
+  &__details {
+    align-items: flex-end;
+    flex-direction: row;
+    &_avatar {
+        align-items: center;
+        bottom:12px;
+        display: flex;
+        left: 0;
+        position: relative;
+      }
+
+     .stats__list{
+      margin:6px;
+      padding:12px;
+    }
+  }
+}
+
 }
 </style>
