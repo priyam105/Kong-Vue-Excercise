@@ -10,7 +10,7 @@ describe('AppTag.vue', () => {
   })
   it('renders the Tag component when correct props are passed', () => {
     expect(wrapper.exists()).toBe(true)
-    expect(wrapper.find('.tag__label').text()).toBe('Dummy')
+    expect(wrapper.findTestId('tag__label').text()).toBe('Dummy')
 
   })
 })

@@ -3,6 +3,7 @@
     <ul
       v-if="hasValidList"
       class="stats__list"
+      data-testid="stats__list"
     >
       <li>
         <span class="value">{{ formatMetric("latency", list?.latency) }}</span>

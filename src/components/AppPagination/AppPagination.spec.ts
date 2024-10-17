@@ -11,7 +11,7 @@ describe('PaginationComponent', () => {
   }
   it('renders the pagination correctly', () => {
     const wrapper = mount(PaginationComponent, { props: defaultProps })
-    expect(wrapper.exists()).toBe(true)
+    expect(wrapper.findTestId('pagination').exists()).toBe(true)
   })
 
   it('disables previous button on the first page', () => {

@@ -13,8 +13,11 @@ describe('Card.vue', () => {
         serviceDetails: services[1],
       },
     })
-    expect(wrapper.find('.text-header').text()).toBe('Small Steel Salad')
-    expect(wrapper.find('.text-description').text()).toBe('Boston\'s most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles')
+    const card = wrapper.findTestId('card')
+    console.log(card.html())
+    expect(card.exists()).toBe(true)
+    expect(card.find(('[data-testid="text-header"]')).text()).toBe('Small Steel Salad')
+    expect(card.find(('[data-testid="text-description"]')).text()).toBe('Boston\'s most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles')
   })
 
   it('renders the tag and status indicator', () => {
@@ -46,7 +49,7 @@ describe('Card.vue', () => {
 
     const avatars = wrapper.findAllComponents(Avatar)
     expect(avatars.length).toBe(2) // Only first 2 avatars should render
-    expect(wrapper.find('.avatar-placeholder').text()).toBe('+2') // Placeholder for the 3rd developer
+    expect(wrapper.findTestId('avatar-placeholder').text()).toBe('+2') // Placeholder for the 3rd developer
   })
 
   it('does not render avatars if no developers are present', () => {
@@ -61,6 +64,6 @@ describe('Card.vue', () => {
       },
     })
 
-    expect(wrapper.find('.card__details_avatar').exists()).toBe(false)
+    expect(wrapper.findTestId('card__details_avatar').exists()).toBe(false)
   })
 })

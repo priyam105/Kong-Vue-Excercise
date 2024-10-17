@@ -2,6 +2,7 @@
   <div
     v-if="avatarMetaData?.avatar"
     class="avatars"
+    data-testid="avatars"
   >
     <div class="avatars__profile">
       <img

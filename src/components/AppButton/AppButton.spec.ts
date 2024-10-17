@@ -11,7 +11,7 @@ describe('Button.vue', () => {
       },
     })
 
-    const button = wrapper.find('button')
+    const button = wrapper.findTestId('button')
     expect(button.exists()).toBe(true)
     expect(button.text()).toBe('Click me')
   })
@@ -27,7 +27,7 @@ describe('Button.vue', () => {
       },
     })
 
-    const button = wrapper.find('button')
+    const button = wrapper.findTestId('button')
     expect(button.classes()).toContain('secondary-button')
   })
 
@@ -39,7 +39,7 @@ describe('Button.vue', () => {
       },
     })
 
-    const button = wrapper.find('button')
+    const button = wrapper.findTestId('button')
     expect(button.classes()).toContain('disabled')
     expect(button.attributes('disabled')).toBeDefined()
 
@@ -53,7 +53,7 @@ describe('Button.vue', () => {
       },
     })
 
-    const button = wrapper.find('button')
+    const button = wrapper.findTestId('button')
     await button.trigger('click')
     expect(wrapper.emitted('buttonClicked')).toBeTruthy()
   })

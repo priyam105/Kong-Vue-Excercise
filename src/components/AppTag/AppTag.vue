@@ -1,9 +1,12 @@
 <template>
   <div
     class="tag"
-    data-test="tag"
+    data-testid="tag"
   >
-    <span class="tag__label">{{ label }}</span>
+    <span
+      class="tag__label"
+      data-testid="tag__label"
+    >{{ label }}</span>
   </div>
 </template>
 

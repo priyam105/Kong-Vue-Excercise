@@ -12,15 +12,15 @@ describe('AppModal.vue', () => {
   })
   it('renders the modal on the UI when correct props are passed', () => {
     const developerDetailsContent = wrapper.find('.version-dev__details')
-    expect(wrapper.find('.overlay').exists()).toBe(true)
-    expect(wrapper.find('.modal').exists()).toBe(true)
+    expect(wrapper.findTestId('overlay').exists()).toBe(true)
+    expect(wrapper.findTestId('modal').exists()).toBe(true)
     expect(wrapper.find('h4').text()).toBe(
       `Versions (${modalContents.length})`,
     )
-    expect(wrapper.find('.version-name').text()).toBe(
+    expect(wrapper.findTestId('version-name').text()).toBe(
       `v${modalContents[0].versionName}`,
     )
-    expect(wrapper.find('.version-desc').text()).toBe(
+    expect(wrapper.findTestId('version-desc').text()).toBe(
       modalContents[0].versionDesc,
     )
     expect(developerDetailsContent.find('p:nth-child(1)').text()).toBe(

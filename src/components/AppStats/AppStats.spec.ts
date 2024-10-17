@@ -10,7 +10,7 @@ describe('AppStats.vue', () => {
       },
     })
 
-    const listItems = wrapper.find('.stats__list').findAll('li')
+    const listItems = wrapper.findTestId('stats__list').findAll('li')
     expect(listItems).toHaveLength(3)
   })
 
@@ -27,7 +27,7 @@ describe('AppStats.vue', () => {
       errors: '8.65%',
     }
 
-    const listItems = wrapper.find('.stats__list').findAll('li')
+    const listItems = wrapper.findTestId('stats__list').findAll('li')
     const requestErrorSection = listItems[2].find('.requests-error')
     expect(listItems[0].find('.value').text()).toBe(expectedValues.latency)
     expect(listItems[1].find('.value').text()).toBe(expectedValues.uptime)

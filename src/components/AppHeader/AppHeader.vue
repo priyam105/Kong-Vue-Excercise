@@ -1,5 +1,8 @@
 <template>
-  <nav class="header-nav">
+  <nav
+    class="header-nav"
+    data-testid="header-nav"
+  >
     <div class="header__logo">
       <router-link
         class="header-text link"

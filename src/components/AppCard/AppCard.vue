@@ -1,6 +1,7 @@
 <template>
   <div
     :class="['card', { card__unclickable: versions.length === 0 }]"
+    data-testid="card"
     @click="handleCardClick"
   >
     <div class="card__status">
@@ -13,10 +14,16 @@
       />
     </div>
     <div class="card__info">
-      <p class="text-header">
+      <p
+        class="text-header"
+        data-testid="text-header"
+      >
         {{ serviceDetails.name || '' }}
       </p>
-      <p class="text-description">
+      <p
+        class="text-description"
+        data-testid="text-description"
+      >
         {{ serviceDetails?.description || '' }}
       </p>
     </div>
@@ -25,9 +32,13 @@
       <div
         v-if="getDeveloperList?.length > 0"
         class="card__details_avatar"
+        data-testid="card__details_avatar"
       >
         <template v-if="getDeveloperList?.length > 2">
-          <div class="avatar-placeholder">
+          <div
+            class="avatar-placeholder"
+            data-testid="avatar-placeholder"
+          >
             {{ `+${getDeveloperList.length - 2}` }}
           </div>
         </template>

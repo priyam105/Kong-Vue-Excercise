@@ -30,7 +30,14 @@ describe('AppHeader.vue', () => {
       linkItems: headerItems,
     },
   })
-  it('renders the header component on the UI when props are passed')
-  expect(wrapper.find('.header-nav').exists()).toBe(true)
+  it('renders the header component on the UI when props are passed', () => {
+    expect(wrapper.findTestId('header-nav').exists()).toBe(true)
+  })
+
+  it('renders the 4 header links on the UI when props are passed', () => {
+    const links = wrapper.findTestId('header-nav').findAll('router-link')
+    expect(links).toHaveLength(4)
+
+  })
 })
 
