@@ -1,7 +1,7 @@
 //Putting appName & headerItems here assuming these won't change often.
 
 export const CONSTANTS = {
-  app: 'Konnect',
+  app: 'KONNECT',
   headerItems: [
     {
       id: 1,

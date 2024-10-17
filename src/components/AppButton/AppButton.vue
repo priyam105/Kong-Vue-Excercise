@@ -24,11 +24,11 @@ const props = defineProps({
   appearance: { type: String, default: 'primary' },
   label: { type: String, default: '' },
   icon: { type: String, default: '' },
-  showIconOnLeft: Boolean,
-  showIconOnRight: Boolean,
-  iconOnly: Boolean,
-  isDisabled: Boolean,
-  to: [String, Object], // to handle either string or object (like router-link)
+  showIconOnLeft: { type: Boolean, default: false },
+  showIconOnRight: { type: Boolean, default: false },
+  iconOnly: { type: Boolean, default: false },
+  isDisabled: { type: Boolean, default: false },
+  to: { type: [String, Object], default: '' },
 })
 const emit = defineEmits<{
   (event: 'buttonClicked'): void
