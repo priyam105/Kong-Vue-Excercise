@@ -31,11 +31,11 @@
       </div>
     </div>
 
-    <div v-if="loading && services.length === 0">
+    <div v-if="loading && paginatedServices?.length === 0">
       Loading...
     </div>
     <div
-      v-else-if="services.length && !loading"
+      v-else-if="paginatedServices?.length > 0 && !loading"
       class="catalog"
     >
       <template
@@ -56,7 +56,7 @@
     </div>
 
     <Pagination
-      v-if="services.length > 0"
+      v-if="paginatedServices.length > 0"
       :current-page="currentPage"
       :records-per-page="recordsPerPage"
       :total-pages="totalPages"
@@ -109,7 +109,7 @@ const totalRecords = computed(() => services.value.length || 0)
 const indexStart = computed(() => (currentPage.value - 1) * recordsPerPage.value)
 const indexEnd = computed(() => indexStart.value + recordsPerPage.value)
 const paginatedServices = computed(() => {
-  if (services.value.length === 0) return []
+  if (!services.value || services.value?.length === 0) return []
   return services.value.slice(indexStart.value, indexEnd.value)
 })
 
@@ -140,6 +140,7 @@ const handleModalClose = () => {
 
 const handleRefreshButtonClick = () => {
   getServices()
+  searchQuery.value = ''
   currentPage.value = 1
   showRefreshButton.value = false
 
@@ -233,7 +234,7 @@ const setTimeForRefreshButton = (timeout: number) => {
 
   .catalog {
     display: grid;
-    grid-template-columns: repeat(3, auto)
+    grid-template-columns: 2fr 2fr 2fr;
   }
 }
 </style>
