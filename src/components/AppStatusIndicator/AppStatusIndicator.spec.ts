@@ -11,7 +11,7 @@ describe('AppStatusIndicator.vue', () => {
       },
     })
 
-    const indicator = wrapper.find('.status-indicator')
+    const indicator = wrapper.findTestId('status-indicator')
     expect(indicator.exists()).toBe(true)
     expect(indicator.text()).includes('Published')
   })
@@ -22,7 +22,7 @@ describe('AppStatusIndicator.vue', () => {
       },
     })
 
-    const indicator = wrapper.find('.status-indicator')
+    const indicator = wrapper.findTestId('status-indicator')
     expect(indicator.exists()).toBe(true)
     expect(indicator.text()).includes('Unpublished')
   })
@@ -34,7 +34,7 @@ describe('AppStatusIndicator.vue', () => {
       },
     })
 
-    const indicator = wrapper.find('.status-indicator')
+    const indicator = wrapper.findTestId('status-indicator')
     expect(indicator.exists()).toBe(true)
     expect(indicator.text()).includes('In Progress')
   })

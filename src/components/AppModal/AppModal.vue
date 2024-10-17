@@ -2,8 +2,12 @@
   <div
     v-if="modalOpen"
     class="overlay"
+    data-testid="overlay"
   >
-    <div class="modal">
+    <div
+      class="modal"
+      data-testid="modal"
+    >
       <div class="modal__header">
         <h4>Versions ({{ modalContents.length }})</h4>
         <Button
@@ -19,13 +23,22 @@
         class="modal__content"
         :class="{ 'last-column': content?.developerDetails?.name }"
       >
-        <div class="version-name">
+        <div
+          class="version-name"
+          data-testid="version-name"
+        >
           v{{ content.versionName }}
         </div>
-        <div class="version-desc">
+        <div
+          class="version-desc"
+          data-testid="version-desc"
+        >
           {{ content.versionDesc }}
         </div>
-        <div class="version-type">
+        <div
+          class="version-type"
+          data-testid="version-type"
+        >
           <Tag :label="content.type" />
         </div>
         <div

@@ -5,6 +5,7 @@
       `${appearance}-button`,
       { 'disabled': isDisabled }
     ]"
+    data-testid="button"
     :disabled="isDisabled"
     @click="handleClick"
   >

@@ -1,5 +1,8 @@
 <template>
-  <div class="status-indicator">
+  <div
+    class="status-indicator"
+    data-testId="status-indicator"
+  >
     <template v-if="status">
       <img :src="getPublishIcon">
       <p>{{ status }}</p>

@@ -1,5 +1,8 @@
 <template>
-  <div class="pagination">
+  <div
+    class="pagination"
+    data-testid="pagination"
+  >
     <Button
       appearance="secondary"
       icon="<"

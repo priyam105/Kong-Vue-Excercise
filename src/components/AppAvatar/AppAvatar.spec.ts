@@ -9,7 +9,8 @@ describe('AppAvatar.vue', () => {
     },
   })
   it('renders the component on the UI when avatarMetaData is passed as prop', () => {
-    expect(wrapper.isVisible()).toBe(true)
+    const avatar = wrapper.findTestId('avatars')
+    expect(avatar.isVisible()).toBe(true)
   })
 
   it('renders the avatar image when avatarMetaDaa is passed as prop', () => {
