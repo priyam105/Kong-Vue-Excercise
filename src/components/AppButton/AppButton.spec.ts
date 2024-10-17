@@ -41,7 +41,6 @@ describe('Button.vue', () => {
     })
 
     const button = wrapper.find('button')
-    console.log(button.attributes())
     expect(button.classes()).toContain('disabled')
     expect(button.attributes('disabled')).toBeDefined()
 
