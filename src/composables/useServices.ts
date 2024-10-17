@@ -1,6 +1,5 @@
 import { ref, watch, type Ref } from 'vue'
 import axios from 'axios'
-import type { Service } from '@/types/versions'
 
 // This composable is a simplified example for the exercise **and could likely be improved**.
 // Feel free to leave as-is, modify, or remove this file (and any others) as desired.
