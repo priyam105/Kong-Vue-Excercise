@@ -14,7 +14,6 @@ describe('Card.vue', () => {
       },
     })
     const card = wrapper.findTestId('card')
-    console.log(card.html())
     expect(card.exists()).toBe(true)
     expect(card.find(('[data-testid="text-header"]')).text()).toBe('Small Steel Salad')
     expect(card.find(('[data-testid="text-description"]')).text()).toBe('Boston\'s most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles')
