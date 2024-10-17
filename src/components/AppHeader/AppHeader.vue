@@ -7,9 +7,9 @@
       >
         <img
           alt="Logo Icon"
-          height="26"
+          :height="logoHeight"
           src="@/assets/images/header-icon.svg"
-          width="29"
+          :width="logoWidth"
         >
         <span class="header__logo-text desktop_only">{{
           props.headerLogoText
@@ -28,9 +28,9 @@
         >
           <img
             :alt="`${item.label}'s logo'`"
-            height="26"
+            :height="logoHeight"
             :src="item.icon"
-            width="29"
+            :width="logoWidth"
           >
           <span class="desktop_only"> {{ item.label }}</span>
         </router-link>
@@ -41,6 +41,9 @@
 
 <script lang="ts" setup>
 import type { LinkItem } from '@/types/header'
+import { CONSTANTS } from '@/lib/constants'
+
+const { logoHeight, logoWidth } = CONSTANTS
 
 const props = defineProps<{
   headerLogoText: string;

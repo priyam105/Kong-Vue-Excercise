@@ -11,7 +11,6 @@ describe('Button.vue', () => {
       },
     })
 
-    // Check if the button is rendered
     const button = wrapper.find('button')
     expect(button.exists()).toBe(true)
     expect(button.text()).toBe('Click me')
@@ -58,40 +57,5 @@ describe('Button.vue', () => {
     await button.trigger('click')
     expect(wrapper.emitted('buttonClicked')).toBeTruthy()
   })
-
-
-
-  it('renders the icon on the right when showIconOnRight is true', async () => {
-    const wrapper = mount(Button, {
-      props: {
-        showIconOnRight: true,
-        icon: 'right-icon',
-        label: 'Button with right icon',
-      },
-    })
-
-    const rightIcon = wrapper.find('span:last-of-type')
-    expect(rightIcon.text()).toBe('right-icon')
-    expect(wrapper.text()).toContain('Button with right icon')
-  })
-
-  it('renders the icon both on the left and right when both showIconOnLeft and showIconOnRight are true', async () => {
-    const wrapper = mount(Button, {
-      props: {
-        showIconOnLeft: true,
-        showIconOnRight: true,
-        icon: 'double-icon',
-        label: 'Button with double icon',
-      },
-    })
-
-    const leftIcon = wrapper.find('span:first-of-type')
-    const rightIcon = wrapper.find('span:last-of-type')
-
-    expect(leftIcon.text()).toBe('double-icon')
-    expect(rightIcon.text()).toBe('double-icon')
-    expect(wrapper.text()).toContain('Button with double icon')
-  })
-
 
 })

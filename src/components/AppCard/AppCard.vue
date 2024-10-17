@@ -5,7 +5,7 @@
   >
     <div class="card__status">
       <div class="card__status__info">
-        <StatusIndicator :status="serviceDetails.published" />
+        <StatusIndicator :status="getPublishingStatus" />
       </div>
       <Tag
         v-if="tagLabel"
@@ -21,10 +21,10 @@
       </p>
     </div>
     <div class="card__details">
-      <Stats
-        v-if="serviceDetails.metrics"
-        :list="serviceDetails.metrics"
-      />
+      <Stats :list="serviceDetails.metrics" />
+      <!-- <template v-else>
+        L
+      </template> -->
       <div
         v-if="getDeveloperList?.length > 0"
         class="card__details_avatar"
@@ -54,6 +54,7 @@ import { computed } from 'vue'
 import Avatar from '@/components/AppAvatar/AppAvatar.vue'
 import StatusIndicator from '../AppStatusIndicator/AppStatusIndicator.vue'
 import type { Developer, Service } from '@/types/versions'
+import type { PublishStatus } from '@/types/publishStatus'
 
 const props = defineProps<{ serviceDetails: Service }>()
 
@@ -75,6 +76,16 @@ const tagLabel = computed(() => {
   return `${versionString} version`
 })
 
+const getPublishingStatus = computed<PublishStatus>(() => {
+  const { published, metrics } = props.serviceDetails
+  const hasValidMetrics = metrics && Object.keys(metrics)?.length > 0
+  if (!hasValidMetrics && !published)
+    return 'In Progress'
+  if (hasValidMetrics && published) {
+    return 'Published'
+  }
+  return 'Unpublished'
+})
 const getDeveloperList = computed(() => {
   return versions.value
     ?.map((version: { developer: Developer }) => version.developer)
@@ -113,11 +124,11 @@ const handleCardClick = () => {
     flex-direction: column;
     justify-content: space-between;
 
-    &_avatar{
+    &_avatar {
       align-items: center;
-        display: flex;
-        left: 12%;
-        position: relative;
+      display: flex;
+      left: 16%;
+      position: relative;
     }
   }
 
@@ -148,26 +159,29 @@ const handleCardClick = () => {
     z-index: 4;
   }
 }
+
 @media screen and (min-width: 1000px) {
-.card {
-width: 400px;
-  &__details {
-    align-items: flex-end;
-    flex-direction: row;
-    &_avatar {
+  .card {
+    width: 400px;
+
+    &__details {
+      align-items: flex-end;
+      flex-direction: row;
+
+      &_avatar {
         align-items: center;
-        bottom:12px;
+        bottom: 12px;
         display: flex;
         left: 0;
         position: relative;
       }
 
-     .stats__list{
-      margin:6px;
-      padding:12px;
+      .stats__list {
+        margin: 6px;
+        padding: 12px;
+      }
     }
   }
-}
 
 }
 </style>

@@ -82,13 +82,15 @@ import { icons } from '@/lib/icons-mapper'
 import Pagination from '@/components/AppPagination/AppPagination.vue'
 import Modal from '../AppModal/AppModal.vue'
 import type { Developer, Service, Version } from '@/types/versions'
+import { CONSTANTS } from '@/lib/constants'
 
+const { paginationRecordsPerPage, debounceTimer, refreshButtonTimer } = CONSTANTS || {}
 const searchQuery = ref('')
 /**An ask by the panel to show a refresh button to allow the user fetch the latest data (through client side) */
 const showRefreshButton = ref(false)
 const modalOpen = ref(false)
 const currentPage = ref(1)
-const recordsPerPage = ref(9)
+const recordsPerPage = ref(paginationRecordsPerPage)
 const timeoutId = ref<ReturnType<typeof setTimeout> | null>(null)
 const modalContent = ref<{
   id: string;
@@ -100,7 +102,7 @@ const modalContent = ref<{
 }[]>([])
 
 
-const debouncedSearchQuery = useDebounce(searchQuery, 500)
+const debouncedSearchQuery = useDebounce(searchQuery, debounceTimer)
 const { services, loading, getServices } = useServices(debouncedSearchQuery)
 
 const totalPages = computed(() => Math.ceil(totalRecords.value / recordsPerPage.value))
@@ -142,10 +144,10 @@ const handleRefreshButtonClick = () => {
   currentPage.value = 1
   showRefreshButton.value = false
 
-  setTimeForRefreshButton(10000)
+  setTimeForRefreshButton(refreshButtonTimer)
 }
 onMounted(() => {
-  setTimeForRefreshButton(10000)
+  setTimeForRefreshButton(refreshButtonTimer)
 })
 
 onUnmounted(() => {
@@ -189,7 +191,7 @@ const setTimeForRefreshButton = (timeout: number) => {
     margin-bottom: 12px;
 
     .search-input {
-      padding: 8px 4px;
+      padding: 8px;
       width: 100%;
     }
   }
