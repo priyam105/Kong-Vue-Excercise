@@ -61,7 +61,7 @@ const buttonType = computed((): string => {
   font-weight: 600;
   height: 44px;
   padding: 12px 24px 12px 16px;
-  width: 197px;
+  width: 50%;
 
   &:hover {
     background-color: var(--primary-button-hover);
@@ -88,5 +88,11 @@ const buttonType = computed((): string => {
     cursor: not-allowed;
     opacity: 0.6
   }
+}
+@media screen and (min-width: 1000px){
+
+.primary-button{
+  width: 100%;
+}
 }
 </style>

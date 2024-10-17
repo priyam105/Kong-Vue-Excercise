@@ -11,7 +11,9 @@
           src="@/assets/images/header-icon.svg"
           width="29"
         >
-        <span class="header__logo-text">{{ props.headerLogoText }}</span>
+        <span class="header__logo-text desktop_only">{{
+          props.headerLogoText
+        }}</span>
       </router-link>
     </div>
     <div class="header__links">
@@ -20,10 +22,17 @@
         :key="item.id"
       >
         <router-link
+          :active-class="item.label"
           class="header__links-items header-text"
-          :to="item.link || '/'"
+          :to="item.link"
         >
-          {{ item.label }}
+          <img
+            :alt="`${item.label}'s logo'`"
+            height="26"
+            :src="item.icon"
+            width="29"
+          >
+          <span class="desktop_only"> {{ item.label }}</span>
         </router-link>
       </template>
     </div>
@@ -32,6 +41,7 @@
 
 <script lang="ts" setup>
 import type { LinkItem } from '@/types/header'
+
 const props = defineProps<{
   headerLogoText: string;
   linkItems: LinkItem[];
@@ -48,12 +58,22 @@ const props = defineProps<{
     font-weight: 600;
     justify-content: space-between;
     padding: 12px;
+
+    .desktop_only {
+      display: none;
+    }
+
+    .router-link-exact-active {
+      background: linear-gradient(180deg, #09224f 0%, #072863 100%);
+      border-radius: 5px;
+    }
   }
 
   &__logo {
-    margin: 0 0 0 65px;
+    margin: 0;
 
     &-text {
+      display: none;
       margin-left: 10px;
       vertical-align: super;
     }
@@ -69,7 +89,27 @@ const props = defineProps<{
 
   &__links {
     display: flex;
-    gap: 24px;
+    gap: 10px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .header {
+    &-nav {
+      .desktop_only {
+        display: inline-block;
+        vertical-align: super;
+        margin: 0 0 0 4px;
+      }
+    }
+
+    &__logo {
+      margin: 0 0 0 65px;
+    }
+
+    &__links {
+      gap: 30px;
+    }
   }
 }
 </style>

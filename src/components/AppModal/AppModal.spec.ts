@@ -12,7 +12,7 @@ describe('AppModal.vue', () => {
   })
   it('renders the modal on the UI when correct props are passed', () => {
     console.log(wrapper.html())
-    const developerDetailsContent = wrapper.find('.version-dev-name')
+    const developerDetailsContent = wrapper.find('.version-dev__details')
     expect(wrapper.find('.overlay').exists()).toBe(true)
     expect(wrapper.find('.modal').exists()).toBe(true)
     expect(wrapper.find('h4').text()).toBe(

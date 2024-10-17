@@ -30,10 +30,10 @@
         </div>
         <div
           v-if="content?.developerDetails?.name"
-          class="version-dev-details"
+          class="version-dev__details"
         >
           <Avatar :avatar-meta-data="content.developerDetails" />
-          <div class="version-dev-name">
+          <div class="dev-name">
             <p>{{ content.developerDetails.name }}</p>
             <p>
               {{ timeAgo(content.modifiedDate) }}
@@ -49,21 +49,18 @@ import Button from '../AppButton/AppButton.vue'
 import Avatar from '../AppAvatar/AppAvatar.vue'
 import Tag from '../AppTag/AppTag.vue'
 import { timeAgo } from '@/lib/utils'
-defineProps<
-  {
-    modalOpen: boolean,
-    modalContents: Array<any>
-  }
->()
+defineProps<{
+  modalOpen: boolean;
+  modalContents: Array<any>;
+}>()
 
 const emit = defineEmits<{
-  (event: 'modalCloseEvent'): void
+  (event: 'modalCloseEvent'): void;
 }>()
 
 const handleModalClose = () => {
   emit('modalCloseEvent')
 }
-
 </script>
 <style lang="scss" scoped>
 .overlay {
@@ -77,7 +74,6 @@ const handleModalClose = () => {
   top: 0;
   width: 100vw;
   z-index: 999;
-
 }
 
 .modal {
@@ -93,7 +89,7 @@ const handleModalClose = () => {
   }
 
   &__content {
-    border-bottom: 1px solid #F1F1F5;
+    border-bottom: 1px solid #f1f1f5;
     display: grid;
     font-size: var(--font-size-small);
     grid-template-columns: 1fr 4fr 1.5fr auto;
@@ -118,19 +114,20 @@ const handleModalClose = () => {
       font-weight: 600;
     }
 
-    &-dev-name {
-      align-items: center;
+    &-dev__details {
       display: flex;
       gap: 20px;
 
-      & p:first-child {
-        font-weight: 600;
-        margin: 0
-      }
+      .dev-name {
+        & p:first-child {
+          font-weight: 600;
+          margin: 0;
+        }
 
-      & p:last-child {
-        color: var(--color-grey);
-        margin: 0
+        & p:last-child {
+          color: var(--color-grey);
+          margin: 0;
+        }
       }
     }
   }
