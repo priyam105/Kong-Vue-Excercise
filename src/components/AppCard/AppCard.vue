@@ -162,8 +162,6 @@ const handleCardClick = () => {
 
 @media screen and (min-width: 1000px) {
   .card {
-    width: 440px;
-
     &__details {
       align-items: flex-end;
       flex-direction: row;
