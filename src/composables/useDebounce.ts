@@ -1,11 +1,9 @@
-import { ref, watch, type Ref } from 'vue'
+import { onBeforeUnmount, ref, watch, type Ref } from 'vue'
 
-export default function useDebounce<T>(value: Ref<T>, delay: number): any {
-  // Set initial value
+export default function useDebounce<T>(value: Ref<any>, delay: number): Ref<any> {
   const debouncedValue = ref<T>(value.value)
 
   let timeout: ReturnType<typeof setTimeout> | null = null
-
 
   watch(value, (newValue) => {
     if (timeout != null) {
@@ -13,8 +11,12 @@ export default function useDebounce<T>(value: Ref<T>, delay: number): any {
     }
     timeout = setTimeout(() => {
       debouncedValue.value = newValue
-
     }, delay)
+  })
+  onBeforeUnmount(() => {
+    if (timeout) {
+      clearTimeout(timeout)
+    }
   })
 
   return debouncedValue

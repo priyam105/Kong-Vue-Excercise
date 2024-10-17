@@ -8,11 +8,11 @@ import type { Service } from '@/types/versions'
 
 export default function useServices(searchQuery?: Ref<string>): {
   getServices: () => Promise<void>;
-  services: Ref<Service[]>;
+  services: Ref<any[]>;
   loading: Ref<boolean>;
   error: Ref<boolean>;
 } {
-  const services = ref<Service[]>([])
+  const services = ref<any[]>([])
   const loading = ref(false)
   const error = ref(false)
   const getServices = async (): Promise<void> => {
