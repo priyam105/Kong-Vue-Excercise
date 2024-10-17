@@ -98,8 +98,8 @@ const props = defineProps<{
     &-nav {
       .desktop_only {
         display: inline-block;
-        vertical-align: super;
         margin: 0 0 0 4px;
+        vertical-align: super;
       }
     }
 

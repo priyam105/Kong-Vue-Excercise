@@ -88,13 +88,13 @@ const handleCardClick = () => {
 </script>
 <style lang="scss" scoped>
 .card {
+  background-color: #fff;
   border: var(--card-border);
   border-radius: 10px;
   cursor: pointer;
   margin: 6px;
   padding: 8px 16px;
   width: 90%;
-  background-color: #fff;
 
   &__unclickable {
     cursor: auto;
@@ -116,8 +116,8 @@ const handleCardClick = () => {
     &_avatar{
       align-items: center;
         display: flex;
-        position: relative;
         left: 12%;
+        position: relative;
     }
   }
 
@@ -156,10 +156,10 @@ width: 400px;
     flex-direction: row;
     &_avatar {
         align-items: center;
-        display: flex;
-        position: relative;
-        left: 0;
         bottom:12px;
+        display: flex;
+        left: 0;
+        position: relative;
       }
 
      .stats__list{

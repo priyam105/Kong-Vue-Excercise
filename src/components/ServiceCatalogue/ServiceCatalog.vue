@@ -151,8 +151,8 @@ const handleModalClose = () => {
   &__actions {
     align-items: center;
     display: flex;
-    gap: 12px;
     flex-direction: column;
+    gap: 12px;
     margin-bottom:12px;
     .search-input {
       padding: 8px 4px;
