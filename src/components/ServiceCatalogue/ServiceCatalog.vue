@@ -24,7 +24,7 @@
 
         <Button
           appearance="primary"
-          :icon="icons.plusIcon"
+          icon="+"
           label="Service Package"
           :show-icon-on-left="true"
         />
@@ -78,7 +78,6 @@ import useServices from '@/composables/useServices'
 import useDebounce from '@/composables/useDebounce'
 import Button from '@/components/AppButton/AppButton.vue'
 import Card from '@/components/AppCard/AppCard.vue'
-import { icons } from '@/lib/icons-mapper'
 import Pagination from '@/components/AppPagination/AppPagination.vue'
 import Modal from '../AppModal/AppModal.vue'
 import type { Developer, Service, Version } from '@/types/versions'
@@ -167,10 +166,6 @@ const setTimeForRefreshButton = (timeout: number) => {
 
 <style lang="scss" scoped>
 .service-catalog {
-  margin: 2rem auto;
-  max-width: 1366px;
-  padding: 0 20px;
-
   &__header {
     display: flex;
     flex-direction: column;

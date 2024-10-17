@@ -37,6 +37,10 @@ describe('AppModal.vue', () => {
 
   it("doesn't add last-column class dynamically to the modal grid if developers object is present", () => {
     const modalContentWithoutDeveloper = modalContents.map((content) => {
+      /**extracting developerDetails & the rest of the property to test modal contents with no developer property passed
+        hence disabling the eslint**/
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { developerDetails, ...rest } = content
       return rest
     })

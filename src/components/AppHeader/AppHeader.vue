@@ -73,7 +73,7 @@ const props = defineProps<{
   }
 
   &__logo {
-    margin: 0;
+    margin: 0 0 0 10px;
 
     &-text {
       display: none;
@@ -92,7 +92,7 @@ const props = defineProps<{
 
   &__links {
     display: flex;
-    gap: 10px;
+    gap: 20px;
   }
 }
 
@@ -107,7 +107,7 @@ const props = defineProps<{
     }
 
     &__logo {
-      margin: 0 0 0 65px;
+      margin: 0 0 0 12px;
     }
 
     &__links {
