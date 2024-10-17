@@ -2,42 +2,41 @@ import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import Modal from '../AppModal/AppModal.vue'
 import modalContents from '../../../mocks/modalContent'
+import { timeAgo } from '@/lib/utils'
 describe('AppModal.vue', () => {
+  const wrapper = mount(Modal, {
+    props: {
+      modalOpen: true,
+      modalContents: modalContents,
+    },
+  })
   it('renders the modal on the UI when correct props are passed', () => {
-    const wrapper = mount(Modal, {
-      props: {
-        modalOpen: true,
-        modalContents: modalContents,
-      },
-    })
     console.log(wrapper.html())
+    const developerDetailsContent = wrapper.find('.version-dev-name')
     expect(wrapper.find('.overlay').exists()).toBe(true)
     expect(wrapper.find('.modal').exists()).toBe(true)
-    expect(wrapper.find('h4').text()).toBe('Versions (1)')
-    expect(wrapper.find('.version-name').text()).toBe('v1.8.6')
-    expect(wrapper.find('.version-desc').text()).toBe('Organized bifurcated hardware')
-    expect(wrapper.find('.version-type').exists()).toBe(true)
-    expect(wrapper.find('.version-dev-name').exists()).toBe(true)
-
+    expect(wrapper.find('h4').text()).toBe(
+      `Versions (${modalContents.length})`,
+    )
+    expect(wrapper.find('.version-name').text()).toBe(
+      `v${modalContents[0].versionName}`,
+    )
+    expect(wrapper.find('.version-desc').text()).toBe(
+      modalContents[0].versionDesc,
+    )
+    expect(developerDetailsContent.find('p:nth-child(1)').text()).toBe(
+      modalContents[0].developerDetails.name,
+    )
+    expect(developerDetailsContent.find('p:nth-child(2)').text()).toBe(
+      timeAgo(modalContents[0].modifiedDate),
+    )
   })
 
   it('adds last-column class dynamically to the modal grid if developers object is present', () => {
-    const wrapper = mount(Modal, {
-      props: {
-        modalOpen: true,
-        modalContents: modalContents,
-      },
-    })
-    console.log(wrapper.html())
-
     expect(wrapper.find('.last-column').exists()).toBe(true)
-
-
   })
 
-
-
-  it('doesn\'t add last-column class dynamically to the modal grid if developers object is present', () => {
+  it("doesn't add last-column class dynamically to the modal grid if developers object is present", () => {
     const modalContentWithoutDeveloper = modalContents.map((content) => {
       const { developerDetails, ...rest } = content
       return rest
@@ -48,9 +47,7 @@ describe('AppModal.vue', () => {
         modalContents: modalContentWithoutDeveloper,
       },
     })
-    console.log(wrapper.html())
+
     expect(wrapper.find('.last-column').exists()).toBe(false)
-
-
   })
 })

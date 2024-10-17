@@ -1,5 +1,4 @@
 <template>
-  <!-- <Teleport to="body"> -->
   <div
     v-if="modalOpen"
     class="overlay"
@@ -31,20 +30,25 @@
         </div>
         <div
           v-if="content?.developerDetails?.name"
-          class="version-dev-name"
+          class="version-dev-details"
         >
           <Avatar :avatar-meta-data="content.developerDetails" />
-          <div>{{ content.developerDetails.name }}</div>
+          <div class="version-dev-name">
+            <p>{{ content.developerDetails.name }}</p>
+            <p>
+              {{ timeAgo(content.modifiedDate) }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- </Teleport> -->
 </template>
 <script lang="ts" setup>
 import Button from '../AppButton/AppButton.vue'
 import Avatar from '../AppAvatar/AppAvatar.vue'
 import Tag from '../AppTag/AppTag.vue'
+import { timeAgo } from '@/lib/utils'
 defineProps<
   {
     modalOpen: boolean,
@@ -118,6 +122,16 @@ const handleModalClose = () => {
       align-items: center;
       display: flex;
       gap: 20px;
+
+      & p:first-child {
+        font-weight: 600;
+        margin: 0
+      }
+
+      & p:last-child {
+        color: var(--color-grey);
+        margin: 0
+      }
     }
   }
 }
