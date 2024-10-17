@@ -102,7 +102,7 @@ const modalContent = ref<{
 
 
 const debouncedSearchQuery = useDebounce(searchQuery, debounceTimer)
-const { services, loading, getServices } = useServices(debouncedSearchQuery)
+const { services, loading } = useServices(debouncedSearchQuery)
 
 const totalPages = computed(() => Math.ceil(totalRecords.value / recordsPerPage.value))
 const totalRecords = computed(() => services.value.length || 0)
@@ -139,11 +139,8 @@ const handleModalClose = () => {
 }
 
 const handleRefreshButtonClick = () => {
-  getServices()
   searchQuery.value = ''
   currentPage.value = 1
-  showRefreshButton.value = false
-
   setTimeForRefreshButton(refreshButtonTimer)
 }
 onMounted(() => {
