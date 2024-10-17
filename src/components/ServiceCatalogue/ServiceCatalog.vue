@@ -9,67 +9,31 @@
       </div>
 
       <div class="service-catalog__actions">
-        <Button
-          v-if="showRefreshButton"
-          appearance="secondary"
-          label="Refresh"
-          @button-clicked="handleRefreshButtonClick"
-        />
-        <input
-          v-model="searchQuery"
-          class="search-input"
-          data-testid="search-input"
-          placeholder="Search services"
-        >
+        <Button v-if="showRefreshButton" appearance="secondary" label="Refresh"
+          @button-clicked="handleRefreshButtonClick" />
+        <input v-model="searchQuery" class="search-input" data-testid="search-input" placeholder="Search services">
 
-        <Button
-          appearance="primary"
-          icon="+"
-          label="Service Package"
-          :show-icon-on-left="true"
-        />
+        <Button appearance="primary" icon="+" label="Service Package" :show-icon-on-left="true" />
       </div>
     </div>
 
     <div v-if="loading && services.length === 0">
       Loading...
     </div>
-    <div
-      v-else-if="services.length && !loading"
-      class="catalog"
-    >
-      <template
-        v-for="service in paginatedServices"
-        :key="service.id"
-      >
-        <Card
-          :service-details="service"
-          @card-clicked-event="handleCardClick"
-        />
+    <div v-else-if="paginatedServices.length && !loading" class="catalog">
+      <template v-for="service in paginatedServices" :key="service.id">
+        <Card :service-details="service" @card-clicked-event="handleCardClick" />
       </template>
     </div>
-    <div
-      v-else-if="services.length === 0 && !loading"
-      data-testid="no-results"
-    >
+    <div v-else-if="services.length === 0 && !loading" data-testid="no-results">
       No services
     </div>
 
-    <Pagination
-      v-if="services.length > 0"
-      :current-page="currentPage"
-      :records-per-page="recordsPerPage"
-      :total-pages="totalPages"
-      :total-records="totalRecords"
-      @update:current-page="handlePageChange"
-    />
+    <Pagination v-if="paginatedServices.length > 0" :current-page="currentPage" :records-per-page="recordsPerPage"
+      :total-pages="totalPages" :total-records="totalRecords" @update:current-page="handlePageChange" />
   </div>
 
-  <Modal
-    v-model:modal-open="modalOpen"
-    :modal-contents="modalContent"
-    @modal-close-event="handleModalClose"
-  />
+  <Modal v-model:modal-open="modalOpen" :modal-contents="modalContent" @modal-close-event="handleModalClose" />
 </template>
 
 <script lang="ts" setup>
@@ -109,7 +73,7 @@ const totalRecords = computed(() => services.value.length || 0)
 const indexStart = computed(() => (currentPage.value - 1) * recordsPerPage.value)
 const indexEnd = computed(() => indexStart.value + recordsPerPage.value)
 const paginatedServices = computed(() => {
-  if (services.value.length === 0) return []
+  if (!services.value || services.value?.length === 0) return []
   return services.value.slice(indexStart.value, indexEnd.value)
 })
 
@@ -140,6 +104,7 @@ const handleModalClose = () => {
 
 const handleRefreshButtonClick = () => {
   getServices()
+  searchQuery.value = ''
   currentPage.value = 1
   showRefreshButton.value = false
 
@@ -233,7 +198,7 @@ const setTimeForRefreshButton = (timeout: number) => {
 
   .catalog {
     display: grid;
-    grid-template-columns: repeat(3, auto)
+    grid-template-columns: 2fr 2fr 2fr;
   }
 }
 </style>
