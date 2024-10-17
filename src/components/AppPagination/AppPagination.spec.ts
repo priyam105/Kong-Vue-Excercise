@@ -17,7 +17,6 @@ describe('PaginationComponent', () => {
   it('disables previous button on the first page', () => {
     const wrapper = mount(PaginationComponent, { props: { ...defaultProps, currentPage: 1 } })
     const prevButton = wrapper.findAll('button')[0]
-    console.log(prevButton.html())
     expect(prevButton.attributes('disabled')).toBeDefined()
   })
 

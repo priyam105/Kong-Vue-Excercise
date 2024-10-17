@@ -23,14 +23,14 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import Button from '../AppButton/AppButton.vue'
 const props = defineProps<{
   totalPages: number,
   currentPage: number,
   recordsPerPage?: number | 9;
   totalRecords?: number,
-  indexEnd?: number,
+
 }>()
 
 const emit = defineEmits<{
@@ -61,6 +61,12 @@ const count = computed(() => {
   const toPageCount = totalRecords > currentPage.value * recordsPerPage ? currentPage.value * recordsPerPage : totalRecords
   return `${fromPageCount}- ${toPageCount}`
 })
+
+
+watch(()=>props.currentPage,() => {
+  currentPage.value = props.currentPage
+})
+
 </script>
 <style scoped lang="scss">
 .pagination {

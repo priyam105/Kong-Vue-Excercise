@@ -9,7 +9,7 @@ describe('AppStats.vue', () => {
         list: services[0].metrics,
       },
     })
-    console.log(wrapper.html())
+
     const listItems = wrapper.find('.stats__list').findAll('li')
     expect(listItems).toHaveLength(3)
   })

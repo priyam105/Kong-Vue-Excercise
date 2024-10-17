@@ -9,12 +9,19 @@
       </div>
 
       <div class="service-catalog__actions">
+        <Button
+          v-if="showRefreshButton"
+          appearance="secondary"
+          label="Refresh"
+          @button-clicked="handleRefreshButtonClick"
+        />
         <input
           v-model="searchQuery"
           class="search-input"
           data-testid="search-input"
           placeholder="Search services"
         >
+
         <Button
           appearance="primary"
           :icon="icons.plusIcon"
@@ -51,7 +58,6 @@
     <Pagination
       v-if="services.length > 0"
       :current-page="currentPage"
-      :index-end="indexEnd"
       :records-per-page="recordsPerPage"
       :total-pages="totalPages"
       :total-records="totalRecords"
@@ -67,8 +73,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import useServices from '@/composables/useServices'
+import useDebounce from '@/composables/useDebounce'
 import Button from '@/components/AppButton/AppButton.vue'
 import Card from '@/components/AppCard/AppCard.vue'
 import { icons } from '@/lib/icons-mapper'
@@ -77,14 +84,12 @@ import Modal from '../AppModal/AppModal.vue'
 import type { Developer, Service, Version } from '@/types/versions'
 
 const searchQuery = ref('')
-console.log(searchQuery.value)
-const { services, loading } = useServices(searchQuery)
-
-
-
+/**An ask by the panel to show a refresh button to allow the user fetch the latest data (through client side) */
+const showRefreshButton = ref(false)
 const modalOpen = ref(false)
 const currentPage = ref(1)
 const recordsPerPage = ref(9)
+const timeoutId = ref<ReturnType<typeof setTimeout> | null>(null)
 const modalContent = ref<{
   id: string;
   type: string;
@@ -93,6 +98,10 @@ const modalContent = ref<{
   modifiedDate: string;
   developerDetails: Developer;
 }[]>([])
+
+
+const debouncedSearchQuery = useDebounce(searchQuery, 500)
+const { services, loading, getServices } = useServices(debouncedSearchQuery)
 
 const totalPages = computed(() => Math.ceil(totalRecords.value / recordsPerPage.value))
 const totalRecords = computed(() => services.value.length || 0)
@@ -111,7 +120,6 @@ const handlePageChange = (newPage: number) => {
 const handleCardClick = (services: Service) => {
   modalOpen.value = true
   modalContent.value = []
-  console.log(services)
 
   services.versions.forEach((version: Version) =>
     modalContent.value.push({
@@ -122,11 +130,36 @@ const handleCardClick = (services: Service) => {
       modifiedDate: version.updated_at,
       developerDetails: version.developer,
     }))
-  console.log(modalContent)
+
 }
 
 const handleModalClose = () => {
   modalOpen.value = false
+}
+
+const handleRefreshButtonClick = () => {
+  getServices()
+  currentPage.value = 1
+  showRefreshButton.value = false
+
+  setTimeForRefreshButton(10000)
+}
+onMounted(() => {
+  setTimeForRefreshButton(10000)
+})
+
+onUnmounted(() => {
+  if (timeoutId.value) {
+    clearTimeout(timeoutId.value)
+  }
+})
+
+const setTimeForRefreshButton = (timeout: number) => {
+  showRefreshButton.value = false
+  timeoutId.value = setTimeout(() => {
+    showRefreshButton.value = true
+  }, timeout)
+
 }
 </script>
 
@@ -153,10 +186,11 @@ const handleModalClose = () => {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin-bottom:12px;
+    margin-bottom: 12px;
+
     .search-input {
       padding: 8px 4px;
-        width: 100%;
+      width: 100%;
     }
   }
 }
@@ -186,10 +220,11 @@ const handleModalClose = () => {
 
 @media screen and (min-width: 1000px) {
 
-.service-catalog{
-  &__actions{
-    flex-direction: row;
-  }
+  .service-catalog {
+    &__actions {
+      flex-direction: row;
+    }
+
     &__header {
       display: flex;
       flex-direction: row;
@@ -197,10 +232,11 @@ const handleModalClose = () => {
 
 
     }
-}
-.catalog {
-  display: grid;
-  grid-template-columns: repeat(3, auto)
-}
+  }
+
+  .catalog {
+    display: grid;
+    grid-template-columns: repeat(3, auto)
+  }
 }
 </style>
