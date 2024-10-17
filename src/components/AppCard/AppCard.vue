@@ -14,17 +14,14 @@
     </div>
     <div class="card__info">
       <p class="text-header">
-        {{ serviceDetails.name }}
+        {{ serviceDetails.name || '' }}
       </p>
       <p class="text-description">
-        {{ serviceDetails.description }}
+        {{ serviceDetails?.description || '' }}
       </p>
     </div>
     <div class="card__details">
       <Stats :list="serviceDetails.metrics" />
-      <!-- <template v-else>
-        L
-      </template> -->
       <div
         v-if="getDeveloperList?.length > 0"
         class="card__details_avatar"
