@@ -2,7 +2,7 @@
   <component
     :is="buttonType"
     :class="[
-      `${appearance || 'primary'}-button`,
+      `${appearance}-button`,
       { 'disabled': isDisabled }
     ]"
     :disabled="isDisabled"
@@ -15,7 +15,6 @@
       <span v-if="showIconOnRight && icon">{{ icon }}</span>
     </span>
   </component>
-  <span v-if="showIconOnRight">{{ icon }}</span>
 </template>
 
 <script lang="ts" setup>
@@ -23,8 +22,8 @@ import { computed, defineProps } from 'vue'
 
 const props = defineProps({
   appearance: { type: String, default: 'primary' },
-  label: { type:String, default:'' },
-  icon: String,
+  label: { type: String, default: '' },
+  icon: { type: String, default: '' },
   showIconOnLeft: Boolean,
   showIconOnRight: Boolean,
   iconOnly: Boolean,
@@ -89,10 +88,11 @@ const buttonType = computed((): string => {
     opacity: 0.6
   }
 }
-@media screen and (min-width: 1000px){
 
-.primary-button{
-  width: 100%;
-}
+@media screen and (min-width: 1000px) {
+
+  .primary-button {
+    width: 100%;
+  }
 }
 </style>

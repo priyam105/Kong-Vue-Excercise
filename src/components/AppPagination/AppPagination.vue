@@ -25,10 +25,14 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import Button from '../AppButton/AppButton.vue'
+import { CONSTANTS } from '@/lib/constants'
+
+const { paginationRecordsPerPage } = CONSTANTS
+
 const props = defineProps<{
   totalPages: number,
   currentPage: number,
-  recordsPerPage?: number | 9;
+  recordsPerPage?: number,
   totalRecords?: number,
 
 }>()
@@ -54,7 +58,7 @@ const handleNextPage = () => {
 }
 
 const count = computed(() => {
-  const recordsPerPage = props.recordsPerPage ?? 9
+  const recordsPerPage = props.recordsPerPage ?? paginationRecordsPerPage
   const totalRecords = props.totalRecords ?? 0
 
   const fromPageCount = (currentPage.value - 1) * recordsPerPage + 1
@@ -63,7 +67,7 @@ const count = computed(() => {
 })
 
 
-watch(()=>props.currentPage,() => {
+watch(() => props.currentPage, () => {
   currentPage.value = props.currentPage
 })
 

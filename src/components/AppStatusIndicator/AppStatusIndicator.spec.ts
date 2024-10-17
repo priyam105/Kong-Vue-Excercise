@@ -4,10 +4,10 @@ import { mount } from '@vue/test-utils'
 
 describe('AppStatusIndicator.vue', () => {
 
-  it('renders the StatusIndicator component with Published label when status:true props is passed', () => {
+  it('renders the StatusIndicator component with Published label when `published` status props is passed', () => {
     const wrapper = mount(StatusIndicator, {
       props: {
-        status: true,
+        status: 'Published',
       },
     })
 
@@ -15,15 +15,27 @@ describe('AppStatusIndicator.vue', () => {
     expect(indicator.exists()).toBe(true)
     expect(indicator.text()).includes('Published')
   })
-  it('renders the StatusIndicator component with Published label when status:false props is passed', () => {
+  it('renders the StatusIndicator component with Unpublished label when `Unpublished`status props is passed', () => {
     const wrapper = mount(StatusIndicator, {
       props: {
-        status: false,
+        status: 'Unpublished',
       },
     })
 
     const indicator = wrapper.find('.status-indicator')
     expect(indicator.exists()).toBe(true)
     expect(indicator.text()).includes('Unpublished')
+  })
+
+  it('renders the StatusIndicator component with In Progress label when `In Progress`status props is passed', () => {
+    const wrapper = mount(StatusIndicator, {
+      props: {
+        status: 'In Progress',
+      },
+    })
+
+    const indicator = wrapper.find('.status-indicator')
+    expect(indicator.exists()).toBe(true)
+    expect(indicator.text()).includes('In Progress')
   })
 })
