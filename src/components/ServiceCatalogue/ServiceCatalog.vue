@@ -31,11 +31,11 @@
       </div>
     </div>
 
-    <div v-if="loading && services.length === 0">
+    <div v-if="loading && paginatedServices?.length === 0">
       Loading...
     </div>
     <div
-      v-else-if="paginatedServices.length && !loading"
+      v-else-if="paginatedServices?.length > 0 && !loading"
       class="catalog"
     >
       <template
