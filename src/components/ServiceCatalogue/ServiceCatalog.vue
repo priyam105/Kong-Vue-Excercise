@@ -141,7 +141,7 @@ const handleModalClose = () => {
 }
 
 const handleServiceClick = () => {
-  alert(`Service creation initiated for ${getUserName}`)
+  alert(`Service creation initiated for ${getUserName()}`)
 }
 
 const handleRefreshButtonClick = () => {
