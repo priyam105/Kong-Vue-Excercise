@@ -138,7 +138,7 @@ const handleCardClick = () => {
     &_avatar {
       align-items: center;
       display: flex;
-      left: 16%;
+      left: 6%;
       position: relative;
     }
   }
