@@ -15,6 +15,8 @@ The application is built using:
 - The types folder has typescript types & interfaces.
 - The styles folder has a partial called `_variables.scss` which has defined variables for further usage across the application & `common.scss` styles within it.
 
+Every step mentioned in the GitHub README (https://github.com/Kong/konnect-team-interview-frontend-exercise) for project setup & commits has been followed, ensuring that the setup and usage guidelines are adhered to throughout the project.
+
 ### Additional Requirements 
 - Added refresh button that appears every 10 seconds (added specifically to accomodate the requirement asked during Panel 1 interview).
 - Debouncing
