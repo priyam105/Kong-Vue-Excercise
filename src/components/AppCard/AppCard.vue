@@ -27,7 +27,7 @@
         {{ serviceDetails?.description || '' }}
       </p>
     </div>
-    <div class="card__details">
+    <div :class="['card__details', {'card__details--no-description':!serviceDetails.description}]">
       <Stats :list="serviceDetails.metrics" />
       <div
         v-if="getDeveloperList?.length > 0"
@@ -132,10 +132,13 @@ const handleCardClick = () => {
     flex-direction: column;
     justify-content: space-between;
 
+    &--no-description{
+      margin-top:56px;
+    }
     &_avatar {
       align-items: center;
       display: flex;
-      left: 16%;
+      left: 6%;
       position: relative;
     }
   }

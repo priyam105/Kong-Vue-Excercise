@@ -57,6 +57,7 @@ const hasValidList = computed(() => {
 <style lang="scss" scoped>
 .stats {
   &__list {
+    padding:0 0 0 12px;
     li::marker {
       color: #42d782;
     }
