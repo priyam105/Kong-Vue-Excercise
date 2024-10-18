@@ -4,7 +4,9 @@
     data-testId="status-indicator"
   >
     <template v-if="status">
-      <img :src="getPublishIcon" :alt="status">
+      <img :alt="status"
+            :src="getPublishIcon" 
+      >
       <p>{{ status }}</p>
     </template>
   </div>
