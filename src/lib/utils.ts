@@ -25,3 +25,7 @@ export const timeAgo = (dateString: string) => {
   return `${Math.floor(timeDiff / 86400000)} days ago` // >= 1 day
 
 }
+
+export const getUserName = () => {
+  return localStorage.getItem('userName') ?? 'Priyam' //In realtime this will et fetched from localStorage or api.
+}

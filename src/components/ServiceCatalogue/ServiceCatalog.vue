@@ -27,6 +27,7 @@
           icon="+"
           label="Service Package"
           :show-icon-on-left="true"
+          @button-clicked="handleServiceClick"
         />
       </div>
     </div>
@@ -82,6 +83,7 @@ import Pagination from '@/components/AppPagination/AppPagination.vue'
 import Modal from '../AppModal/AppModal.vue'
 import type { Developer, Service, Version } from '@/types/versions'
 import { CONSTANTS } from '@/lib/constants'
+import { getUserName } from '@/lib/utils'
 
 const { paginationRecordsPerPage, debounceTimer, refreshButtonTimer } = CONSTANTS || {}
 const searchQuery = ref('')
@@ -136,6 +138,10 @@ const handleCardClick = (services: Service) => {
 
 const handleModalClose = () => {
   modalOpen.value = false
+}
+
+const handleServiceClick = () => {
+  alert(`Service creation initiated for ${getUserName}`)
 }
 
 const handleRefreshButtonClick = () => {
