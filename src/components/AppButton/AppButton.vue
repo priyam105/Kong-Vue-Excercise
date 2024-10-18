@@ -9,11 +9,20 @@
     :disabled="isDisabled"
     @click="handleClick"
   >
-    <span v-if="iconOnly && icon">{{ icon }}</span>
+    <span
+      v-if="iconOnly && icon"
+      class="icon"
+    >{{ icon }}</span>
     <span v-else>
-      <span v-if="showIconOnLeft && icon">{{ icon }}</span>
+      <span
+        v-if="showIconOnLeft && icon"
+        class="icon--left"
+      >{{ icon }}</span>
       <span v-if="!iconOnly">{{ label }}</span>
-      <span v-if="showIconOnRight && icon">{{ icon }}</span>
+      <span
+        v-if="showIconOnRight && icon"
+        class="icon--right"
+      >{{ icon }}</span>
     </span>
   </component>
 </template>
@@ -62,7 +71,15 @@ const buttonType = computed((): string => {
   height: 44px;
   padding: 12px 24px 12px 16px;
   width: 50%;
-
+.icon
+{
+&--left{
+  margin: 0 4px 0 0;
+}
+&--right{
+  margin: 0 0 0 4px;
+}
+}
   &:hover {
     background-color: var(--primary-button-hover);
   }

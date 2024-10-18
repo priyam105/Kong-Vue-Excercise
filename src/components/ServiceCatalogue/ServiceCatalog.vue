@@ -15,18 +15,25 @@
           label="Refresh"
           @button-clicked="handleRefreshButtonClick"
         />
-        <input
-          v-model="searchQuery"
-          class="search-input"
-          data-testid="search-input"
-          placeholder="Search services"
-        >
+        <div class="search-box">
+          <input
+            v-model="searchQuery"
+            class="search-box__input"
+            data-testid="search-input"
+            placeholder="Search services"
+          >
+          <img
+            alt="Search Icon"
+            class="search-box__icon"
+            src="@/assets/icons/search.svg"
+          >
+        </div>
 
         <Button
           appearance="primary"
           icon="+"
           label="Service Package"
-          :show-icon-on-left="true"
+          :show-icon-on-right="true"
           @button-clicked="handleServiceClick"
         />
       </div>
@@ -189,9 +196,24 @@ const setTimeForRefreshButton = (timeout: number) => {
     gap: 12px;
     margin-bottom: 12px;
 
-    .search-input {
-      padding: 8px;
-      width: 100%;
+    .search-box {
+  align-items: center;
+
+ display: flex;
+  position: relative;
+  width: 100%;
+      &__input{
+    border: 1px solid var(--input-text-border);
+    border-radius: 5px;
+    height: 36px;
+       padding: 0px 4px 0px 30px;
+    width: 100%;
+      }
+      &__icon{
+    height: 12px;
+    left: 12px;
+       position: absolute;
+      }
     }
   }
 }
