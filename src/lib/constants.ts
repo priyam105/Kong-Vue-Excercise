@@ -1,5 +1,7 @@
 //Putting appName & headerItems here assuming these won't change often.
 
+import { getUserName } from './utils'
+
 export const CONSTANTS = {
   app: 'KONNECT',
   headerItems: [
@@ -19,7 +21,7 @@ export const CONSTANTS = {
     {
       id: 3,
       icon: new URL('@/assets/icons/user.svg', import.meta.url).href,
-      label: 'Priyam',
+      label: getUserName(),
       link: '/user',
 
     },
